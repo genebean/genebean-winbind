@@ -4,16 +4,25 @@
   "issues_url": "https://github.com/genebean/genebean-winbind/issues",
   "license": "BSD-3-Clause",
   "name": "GeneBean-winbind",
-  "operatingsystem_support": [
-    {
-      "osfamily":"RedHat",
-      "operatingsystemmajrelease":[ "5", "6", "7" ]
+  "operatingsystem_support": [{
+      "operatingsystem": "CentOS",
+      "operatingsystemrelease": [ "5",
+        "6",
+        "7"
+      ],
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [ "5",
+        "6",
+        "7"
+      ]
     }
   ],
   "project_page": "https://github.com/genebean/genebean-winbind",
   "requirements": [],
   "source": "https://github.com:genebean/genebean-winbind.git",
   "summary": "A Puppet module for configuring Winbind on a Linux host",
-  "tags": ["winbind", "smb"],
+  "tags": [ "winbind",
+    "smb"
+  ],
   "version": "0.1.0"
 }
