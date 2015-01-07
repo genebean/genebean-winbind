@@ -32,7 +32,7 @@ krb5_ccache_type = <%= @pam_krb5_ccache_type %>
 # make successful authentication dependend on membership of one SID
 # (can also take a name)
 # Find SID with wbinfo -n groupname
-require_membership_of = <%= @pam_require_membership_of %>
+require_membership_of = <%= @pam_require_membership_of.join(',') %>
 
 # password expiry warning period in days
 warn_pwd_expire = <%= @pam_warn_pwd_expire %>

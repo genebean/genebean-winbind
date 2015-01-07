@@ -11,49 +11,49 @@
 # Sample Usage:
 #
 class winbind (
-  $pam_debug                            = 'no',
-  $pam_debug_state                      = 'no',
-  $pam_cached_login                     = 'yes',
-  $pam_krb5_auth                        = 'no',
-  $pam_krb5_ccache_type                 = '',
-  $pam_require_membership_of            = ['',],
-  $pam_warn_pwd_expire                  = 14,
-  $pam_silent                           = 'no',
-  $pam_mkhomedir                        = 'no',
-  $smb_workgroup                        = 'EXAMPLE',
-  $smb_realm                            = 'EXAMPLE.COM',
-  $smb_encrypt_passwords                = 'yes',
-  $smb_log_level                        = 0,
-  $smb_syslog                           = 0,
-  $smb_server_string                    = $::hostname,
-  $smb_security                         = 'ads',
-  $smb_log_file                         = '/var/log/samba/%m',
-  $smb_max_log_size                     = 0,
-  $smb_printcap_name                    = 'cups',
-  $smb_printing                         = 'cups',
-  $smb_winbind_enum_users               = 'no',
-  $smb_winbind_enum_groups              = 'no',
-  $smb_winbind_use_default_domain       = true,
-  $smb_winbind_nss_info                 = 'rfc2307',
-  $smb_winbind_normalize_names          = 'no',
-  $smb_winbind_offline_logon            = true,
-  $smb_winbind_separator                = '+',
-  $smb_template_homedir                 = '/home/%D/%U',
-  $smb_template_shell                   = '/bin/bash',
-  $smb_idmap_config_default_backend     = 'autorid',
-  $smb_idmap_config_default_range_start = 1000000,
-  $smb_idmap_config_default_range_end   = 19999999,
-  $smb_idmap_config_default_rangesize   = 1000000,
-  $krb5_default                         = 'FILE:/var/log/krb5libs.log',
-  $krb5_kdc                             = 'FILE:/var/log/krb5kdc.log',
-  $krb5_admin_server                    = 'FILE:/var/log/kadmind.log',
-  $krb5_dns_lookup_realm                = false,
-  $krb5_dns_lookup_kdc                  = true,
-  $krb5_ticket_lifetime                 = '24h',
-  $krb5_renew_lifetime                  = '7d',
-  $krb5_forwardable                     = true,
-  $oddjobd_homdir_mask                  = '0077',
-  ) {
+  $pam_debug                            = $::winbind::params::pam_debug,
+  $pam_debug_state                      = $::winbind::params::pam_debug_state,
+  $pam_cached_login                     = $::winbind::params::pam_cached_login,
+  $pam_krb5_auth                        = $::winbind::params::pam_krb5_auth,
+  $pam_krb5_ccache_type                 = $::winbind::params::pam_krb5_ccache_type,
+  $pam_require_membership_of            = $::winbind::params::pam_require_membership_of,
+  $pam_warn_pwd_expire                  = $::winbind::params::pam_warn_pwd_expire,
+  $pam_silent                           = $::winbind::params::pam_silent,
+  $pam_mkhomedir                        = $::winbind::params::pam_mkhomedir,
+  $smb_workgroup                        = $::winbind::params::smb_workgroup,
+  $smb_realm                            = $::winbind::params::smb_realm,
+  $smb_encrypt_passwords                = $::winbind::params::smb_encrypt_passwords,
+  $smb_log_level                        = $::winbind::params::smb_log_level,
+  $smb_syslog                           = $::winbind::params::smb_syslog,
+  $smb_server_string                    = $::winbind::params::smb_server_string,
+  $smb_security                         = $::winbind::params::smb_security,
+  $smb_log_file                         = $::winbind::params::smb_log_file,
+  $smb_max_log_size                     = $::winbind::params::smb_max_log_size,
+  $smb_printcap_name                    = $::winbind::params::smb_printcap_name,
+  $smb_printing                         = $::winbind::params::smb_printing,
+  $smb_winbind_enum_users               = $::winbind::params::smb_winbind_enum_users,
+  $smb_winbind_enum_groups              = $::winbind::params::smb_winbind_enum_groups,
+  $smb_winbind_use_default_domain       = $::winbind::params::smb_winbind_use_default_domain,
+  $smb_winbind_nss_info                 = $::winbind::params::smb_winbind_nss_info,
+  $smb_winbind_normalize_names          = $::winbind::params::smb_winbind_normalize_names,
+  $smb_winbind_offline_logon            = $::winbind::params::smb_winbind_offline_logon,
+  $smb_winbind_separator                = $::winbind::params::smb_winbind_separator,
+  $smb_template_homedir                 = $::winbind::params::smb_template_homedir,
+  $smb_template_shell                   = $::winbind::params::smb_template_shell,
+  $smb_idmap_config_default_backend     = $::winbind::params::smb_idmap_config_default_backend,
+  $smb_idmap_config_default_range_start = $::winbind::params::smb_idmap_config_default_range_start,
+  $smb_idmap_config_default_range_end   = $::winbind::params::smb_idmap_config_default_range_end,
+  $smb_idmap_config_default_rangesize   = $::winbind::params::smb_idmap_config_default_rangesize,
+  $krb5_default                         = $::winbind::params::krb5_default,
+  $krb5_kdc                             = $::winbind::params::krb5_kdc,
+  $krb5_admin_server                    = $::winbind::params::krb5_admin_server,
+  $krb5_dns_lookup_realm                = $::winbind::params::krb5_dns_lookup_realm,
+  $krb5_dns_lookup_kdc                  = $::winbind::params::krb5_dns_lookup_kdc,
+  $krb5_ticket_lifetime                 = $::winbind::params::krb5_ticket_lifetime,
+  $krb5_renew_lifetime                  = $::winbind::params::krb5_renew_lifetime,
+  $krb5_forwardable                     = $::winbind::params::krb5_forwardable,
+  $oddjobd_homdir_mask                  = $::winbind::params::oddjobd_homdir_mask,
+  ) inherits ::winbind::params {
   # validate parameters
   include stdlib
 
@@ -92,19 +92,104 @@ class winbind (
   validate_array($pam_require_membership_of)
 
   # numbers
-  is_numeric($pam_warn_pwd_expire)
-  is_numeric($smb_log_level)
-  is_numeric($smb_syslog)
-  is_numeric($smb_max_log_size)
-  is_numeric($smb_idmap_config_default_range_start)
-  is_numeric($smb_idmap_config_default_range_end)
-  is_numeric($smb_idmap_config_default_rangesize)
+  if ( !is_numeric($pam_warn_pwd_expire) ) {
+    fail('pam_warn_pwd_expire must be a number')
+  }
+
+  if ( !is_numeric($smb_log_level) ) {
+    fail('smb_log_level must be a number')
+  }
+
+  if ( !is_numeric($smb_syslog) ) {
+    fail('smb_syslog must be a number')
+  }
+
+  if ( !is_numeric($smb_max_log_size) ) {
+    fail('smb_max_log_size must be a number')
+  }
+
+  if ( !is_numeric($smb_idmap_config_default_range_start) ) {
+    fail('smb_idmap_config_default_range_start must be a number')
+  }
+
+  if ( !is_numeric($smb_idmap_config_default_range_end) ) {
+    fail('smb_idmap_config_default_range_end must be a number')
+  }
+
+  if ( !is_numeric($smb_idmap_config_default_rangesize) ) {
+    fail('smb_idmap_config_default_rangesize must be a number')
+  }
+
 
   # booleans
-  is_bool($smb_winbind_use_default_domain)
-  is_bool($smb_winbind_offline_logon)
-  is_bool($krb5_dns_lookup_realm)
-  is_bool($krb5_dns_lookup_kdc)
-  is_bool($krb5_forwardable)
+  if ( !is_bool($smb_winbind_use_default_domain) ) {
+    fail('smb_winbind_use_default_domain must be a true or false')
+  }
+
+  if ( !is_bool($smb_winbind_offline_logon) ) {
+    fail('smb_winbind_offline_logon must be a true or false')
+  }
+
+  if ( !is_bool($krb5_dns_lookup_realm) ) {
+    fail('krb5_dns_lookup_realm must be a true or false')
+  }
+
+  if ( !is_bool($krb5_dns_lookup_kdc) ) {
+    fail('krb5_dns_lookup_kdc must be a true or false')
+  }
+
+  if ( !is_bool($krb5_forwardable) ) {
+    fail('krb5_forwardable must be a true or false')
+  }
+
+
+  # use the install -> config -> service model
+  class { '::winbind::install': } ->
+  class { '::winbind::config':
+  pam_debug                            => $pam_debug,
+  pam_debug_state                      => $pam_debug_state,
+  pam_cached_login                     => $pam_cached_login,
+  pam_krb5_auth                        => $pam_krb5_auth,
+  pam_krb5_ccache_type                 => $pam_krb5_ccache_type,
+  pam_require_membership_of            => $pam_require_membership_of,
+  pam_warn_pwd_expire                  => $pam_warn_pwd_expire,
+  pam_silent                           => $pam_silent,
+  pam_mkhomedir                        => $pam_mkhomedir,
+  smb_workgroup                        => $smb_workgroup,
+  smb_realm                            => $smb_realm,
+  smb_encrypt_passwords                => $smb_encrypt_passwords,
+  smb_log_level                        => $smb_log_level,
+  smb_syslog                           => $smb_syslog,
+  smb_server_string                    => $smb_server_string,
+  smb_security                         => $smb_security,
+  smb_log_file                         => $smb_log_file,
+  smb_max_log_size                     => $smb_max_log_size,
+  smb_printcap_name                    => $smb_printcap_name,
+  smb_printing                         => $smb_printing,
+  smb_winbind_enum_users               => $smb_winbind_enum_users,
+  smb_winbind_enum_groups              => $smb_winbind_enum_groups,
+  smb_winbind_use_default_domain       => $smb_winbind_use_default_domain,
+  smb_winbind_nss_info                 => $smb_winbind_nss_info,
+  smb_winbind_normalize_names          => $smb_winbind_normalize_names,
+  smb_winbind_offline_logon            => $smb_winbind_offline_logon,
+  smb_winbind_separator                => $smb_winbind_separator,
+  smb_template_homedir                 => $smb_template_homedir,
+  smb_template_shell                   => $smb_template_shell,
+  smb_idmap_config_default_backend     => $smb_idmap_config_default_backend,
+  smb_idmap_config_default_range_start => $smb_idmap_config_default_range_start,
+  smb_idmap_config_default_range_end   => $smb_idmap_config_default_range_end,
+  smb_idmap_config_default_rangesize   => $smb_idmap_config_default_rangesize,
+  krb5_default                         => $krb5_default,
+  krb5_kdc                             => $krb5_kdc,
+  krb5_admin_server                    => $krb5_admin_server,
+  krb5_dns_lookup_realm                => $krb5_dns_lookup_realm,
+  krb5_dns_lookup_kdc                  => $krb5_dns_lookup_kdc,
+  krb5_ticket_lifetime                 => $krb5_ticket_lifetime,
+  krb5_renew_lifetime                  => $krb5_renew_lifetime,
+  krb5_forwardable                     => $krb5_forwardable,
+  oddjobd_homdir_mask                  => $oddjobd_homdir_mask,
+  } ->
+  class { '::winbind::service': } ->
+  Class['::winbind']
 
 }
