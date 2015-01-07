@@ -1,5 +1,5 @@
 # Configures settings associated with using winbind for joining Active Directory
-class winbind::install (
+class winbind::config (
   $pam_debug                            = $::winbind::params::pam_debug,
   $pam_debug_state                      = $::winbind::params::pam_debug_state,
   $pam_cached_login                     = $::winbind::params::pam_cached_login,
