@@ -52,6 +52,7 @@ class winbind (
   $krb5_ticket_lifetime                 = '24h',
   $krb5_renew_lifetime                  = '7d',
   $krb5_forwardable                     = true,
+  $oddjobd_homdir_mask                  = '0077',
   ) {
   # validate parameters
   include stdlib
@@ -85,6 +86,7 @@ class winbind (
   validate_string($krb5_admin_server)
   validate_string($krb5_ticket_lifetime)
   validate_string($krb5_renew_lifetime)
+  validate_string($oddjobd_homdir_mask)
 
   # arrays
   validate_array($pam_require_membership_of)
