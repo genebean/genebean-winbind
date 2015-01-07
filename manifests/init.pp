@@ -106,5 +106,11 @@ class winbind (
   is_bool($krb5_dns_lookup_realm)
   is_bool($krb5_dns_lookup_kdc)
   is_bool($krb5_forwardable)
+  
+  # use the install -> config -> service model
+  class { '::winbind::install': } ->
+  class { '::winbind::config': } ->
+  class { '::winbind::service': } ->
+  Class['::winbind']
 
 }
