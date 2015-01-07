@@ -14,13 +14,15 @@ class winbind::service {
         }
 
       } else {
-        service { 'winbind.service':
+        service { 'winbind':
           ensure => 'running',
+          name   => 'winbind.service',
           enable => true,
         }
 
-        service { 'oddjobd.service':
+        service { 'oddjobd':
           ensure => 'running',
+          name   => 'oddjobd.service',
           enable => true,
         }
 
