@@ -1,0 +1,44 @@
+###################################
+#
+# This file is managed by Puppet
+#
+###################################
+#
+# pam_winbind configuration file
+#
+# /etc/security/pam_winbind.conf
+#
+
+[global]
+
+# turn on debugging
+debug = <%= @pam_debug %>
+
+# turn on extended PAM state debugging
+debug_state = <%= @pam_debug_state %>
+
+# request a cached login if possible
+# (needs "winbind offline logon = yes" in smb.conf)
+cached_login = <%= @pam_cached_login %>
+
+# authenticate using kerberos
+krb5_auth = <%= @pam_krb5_auth %>
+
+# when using kerberos, request a "FILE" krb5 credential cache type
+# (leave empty to just do krb5 authentication but not have a ticket
+# afterwards)
+krb5_ccache_type = <%= @pam_krb5_ccache_type %>
+
+# make successful authentication dependend on membership of one SID
+# (can also take a name)
+# Find SID with wbinfo -n groupname
+require_membership_of = <%= @pam_require_membership_of.join(',') %>
+
+# password expiry warning period in days
+warn_pwd_expire = <%= @pam_warn_pwd_expire %>
+
+# omit pam conversations
+silent = <%= @pam_silent %>
+
+# create homedirectory on the fly
+mkhomedir = <%= @pam_mkhomedir %>
