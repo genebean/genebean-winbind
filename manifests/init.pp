@@ -44,6 +44,14 @@ class winbind (
   $smb_idmap_config_default_range_start = 1000000,
   $smb_idmap_config_default_range_end   = 19999999,
   $smb_idmap_config_default_rangesize   = 1000000,
+  $krb5_default                         = 'FILE:/var/log/krb5libs.log',
+  $krb5_kdc                             = 'FILE:/var/log/krb5kdc.log',
+  $krb5_admin_server                    = 'FILE:/var/log/kadmind.log',
+  $krb5_dns_lookup_realm                = false,
+  $krb5_dns_lookup_kdc                  = true,
+  $krb5_ticket_lifetime                 = '24h',
+  $krb5_renew_lifetime                  = '7d',
+  $krb5_forwardable                     = true,
   ) {
   # validate parameters
   include stdlib
@@ -72,6 +80,11 @@ class winbind (
   validate_string($smb_template_homedir)
   validate_string($smb_template_shell)
   validate_string($smb_idmap_config_default_backend)
+  validate_string($krb5_default)
+  validate_string($krb5_kdc)
+  validate_string($krb5_admin_server)
+  validate_string($krb5_ticket_lifetime)
+  validate_string($krb5_renew_lifetime)
 
   # arrays
   validate_array($pam_require_membership_of)
@@ -88,5 +101,8 @@ class winbind (
   # booleans
   is_bool($smb_winbind_use_default_domain)
   is_bool($smb_winbind_offline_logon)
+  is_bool($krb5_dns_lookup_realm)
+  is_bool($krb5_dns_lookup_kdc)
+  is_bool($krb5_forwardable)
 
 }
