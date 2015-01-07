@@ -92,20 +92,56 @@ class winbind (
   validate_array($pam_require_membership_of)
 
   # numbers
-  is_numeric($pam_warn_pwd_expire)
-  is_numeric($smb_log_level)
-  is_numeric($smb_syslog)
-  is_numeric($smb_max_log_size)
-  is_numeric($smb_idmap_config_default_range_start)
-  is_numeric($smb_idmap_config_default_range_end)
-  is_numeric($smb_idmap_config_default_rangesize)
+  if ( !is_numeric($pam_warn_pwd_expire) ) {
+    fail('pam_warn_pwd_expire must be a number')
+  }
+
+  if ( !is_numeric($smb_log_level) ) {
+    fail('smb_log_level must be a number')
+  }
+
+  if ( !is_numeric($smb_syslog) ) {
+    fail('smb_syslog must be a number')
+  }
+
+  if ( !is_numeric($smb_max_log_size) ) {
+    fail('smb_max_log_size must be a number')
+  }
+
+  if ( !is_numeric($smb_idmap_config_default_range_start) ) {
+    fail('smb_idmap_config_default_range_start must be a number')
+  }
+
+  if ( !is_numeric($smb_idmap_config_default_range_end) ) {
+    fail('smb_idmap_config_default_range_end must be a number')
+  }
+
+  if ( !is_numeric($smb_idmap_config_default_rangesize) ) {
+    fail('smb_idmap_config_default_rangesize must be a number')
+  }
+
 
   # booleans
-  is_bool($smb_winbind_use_default_domain)
-  is_bool($smb_winbind_offline_logon)
-  is_bool($krb5_dns_lookup_realm)
-  is_bool($krb5_dns_lookup_kdc)
-  is_bool($krb5_forwardable)
+  if ( !is_bool($smb_winbind_use_default_domain) ) {
+    fail('smb_winbind_use_default_domain must be a true or false')
+  }
+
+  if ( !is_bool($smb_winbind_offline_logon) ) {
+    fail('smb_winbind_offline_logon must be a true or false')
+  }
+
+  if ( !is_bool($krb5_dns_lookup_realm) ) {
+    fail('krb5_dns_lookup_realm must be a true or false')
+  }
+
+  if ( !is_bool($krb5_dns_lookup_kdc) ) {
+    fail('krb5_dns_lookup_kdc must be a true or false')
+  }
+
+  if ( !is_bool($krb5_forwardable) ) {
+    fail('krb5_forwardable must be a true or false')
+  }
+
 
   # use the install -> config -> service model
   class { '::winbind::install': } ->
