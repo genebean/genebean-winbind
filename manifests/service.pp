@@ -3,6 +3,12 @@ class winbind::service {
   case $::osfamily {
     RedHat  : {
       if ($::operatingsystemmajrelease < 7) {
+        service { 'messagebus':
+          ensure => 'running',
+          enable => true,
+          before => Service['oddjobd'],
+        }
+
         service { 'oddjobd':
           ensure => 'running',
           enable => true,
