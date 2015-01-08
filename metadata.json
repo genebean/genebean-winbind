@@ -1,5 +1,5 @@
 {
-  "author": "GeneBean",
+  "author": "Gene Liverman",
   "dependencies": [{
       "name": "puppetlabs/stdlib",
       "version_requirement": ">= 4.4.0"
@@ -7,7 +7,7 @@
   ],
   "issues_url": "https://github.com/genebean/genebean-winbind/issues",
   "license": "BSD-3-Clause",
-  "name": "GeneBean-winbind",
+  "name": "genebean-winbind",
   "operatingsystem_support": [{
       "operatingsystem": "CentOS",
       "operatingsystemrelease": [ "5",
@@ -28,5 +28,5 @@
   "tags": [ "winbind",
     "smb"
   ],
-  "version": "0.2.0"
+  "version": "0.2.1"
 }
