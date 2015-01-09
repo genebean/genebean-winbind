@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.2
+
+* Puppet Forge didn't like having Samba listed in the metadata.json file...
+
 ## 0.3.1
 
 * Added a change log
