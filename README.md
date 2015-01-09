@@ -1,4 +1,4 @@
-[![Puppet Forge][pf-img]][pf-link]
+[![Puppet Forge][pf-img]][pf-link] [![GitHub tag][gh-tag-img]][gh-link]
 
 # winbind
 
@@ -61,5 +61,7 @@ can be found in the root of the module.
 
 Pull requests are welcome!
 
+[gh-tag-img]: https://img.shields.io/github/tag/genebean/genebean-winbind.svg
+[gh-link]: https://github.com/genebean/genebean-winbind
 [pf-img]: https://img.shields.io/puppetforge/v/genebean/winbind.svg
 [pf-link]: https://forge.puppetlabs.com/genebean/winbind
