@@ -144,6 +144,7 @@ class winbind (
 
 
   # use the install -> config -> service model
+  anchor {'::winbind::start': } ->
   class { '::winbind::install': } ->
   class { '::winbind::config':
   pam_debug                            => $pam_debug,
@@ -190,6 +191,6 @@ class winbind (
   oddjobd_homdir_mask                  => $oddjobd_homdir_mask,
   } ->
   class { '::winbind::service': } ->
-  Class['::winbind']
+  anchor {'::winbind::end': }
 
 }
