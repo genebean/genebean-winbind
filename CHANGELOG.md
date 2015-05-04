@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.0 2015-05-04
+
+* Updated to better support RHEL 5
+* Cleaned up parameters
+
 ## 0.3.2
 
 * Puppet Forge didn't like having Samba listed in the metadata.json file...
