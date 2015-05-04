@@ -8,8 +8,10 @@
 2. [Setup requirements](#setup-requirements)
 3. [Beginning with winbind](#beginning-with-winbind)
 4. [Limitations](#limitations)
-5. [License](#license)
-6. [Contributing](#contributing)
+5. [Troubleshooting](#troubleshooting)
+6. [License](#license)
+7. [Contributing](#contributing)
+
 
 ## Overview
 
@@ -17,14 +19,31 @@ This module will configure winbind for joining Active Directory. Tests have not
 been implemented yet but will be. This module is also designed with using hiera
 in mind.
 
+
 ## Setup Requirements
 
 The conifguration used in this module requires Samba >= 3.6.
 
+
 ## Beginning with winbind
 
-There are a significant number of possible parameters. These correspond directly
-to the four configuration files that get edited by this module. Each is prefixed
+### Usage
+
+This module DOES NOT join your machine to AD. This is because I have not found
+a secure way to do the joins since it requries a privledged account and its
+password as part of the join. Once you have run this module at least once you
+can join your domain by executing the following pair of commands:
+
+```bash
+net ads join -U yourADuserName
+authconfig --enablemkhomedir --enablewinbind --enablewinbindauth --update
+```
+
+
+### Parameters
+
+There is a paramter that corresponds directly to each setting in the four
+configuration files that get edited by this module. Each is prefixed
 so that you know which file it effects:
 
 * pam     = /etc/security/pam_winbind.con
@@ -32,7 +51,9 @@ so that you know which file it effects:
 * krb5    = /etc/krb5.conf
 * oddjobd = /etc/oddjobd.conf.d/oddjobd-mkhomedir.conf
 
-The primary parameters are as follows:
+The full list of parameters is listed at the top of the [`init.pp`][init.pp] file.
+A fully functional setup should be atainable by providing values for the
+following three parameters:
 
 `pam_require_membership_of`
 
@@ -47,21 +68,42 @@ This is the short name of your domain.
 This is the long name of your domain. It is also used in krb5.conf for the
 `realms` and `domain_realms` settings.
 
+
 ## Limitations
 
-This module has only been tested on CentOS 6 & 7 but that will be expanded
-some as time goes on.
+This module has only been tested on Red Hat 5 and CentOS 6 & 7 but that will be
+expanded some as time goes on.
+
+
+## Troubleshooting
+
+On RHEL 5 I found that joining was difficult if just the right things were not
+in `/etc/hosts`. In particular, I got errors that my DNS name had to match the
+domain I was joining. I resolved this issue by making a host entry like this:
+
+```bash
+# this should all be on a single line
+127.0.0.1 server.example.com server.ad.example.com server localhost
+localhost.localdomain  localhost4 localhost4.localdomain4
+
+```
+
+This entry is maintained via a host resource defined elsewhere in my Puppet setup.
+
 
 ## License
 
 This is released under the New BSD / BSD-3-Clause license. A copy of the license
 can be found in the root of the module.
 
+
 ## Contributing
 
 Pull requests are welcome!
 
+
 [gh-tag-img]: https://img.shields.io/github/tag/genebean/genebean-winbind.svg
 [gh-link]: https://github.com/genebean/genebean-winbind
+[init.pp]: https://github.com/genebean/genebean-winbind/blob/master/manifests/init.pp
 [pf-img]: https://img.shields.io/puppetforge/v/genebean/winbind.svg
 [pf-link]: https://forge.puppetlabs.com/genebean/winbind
