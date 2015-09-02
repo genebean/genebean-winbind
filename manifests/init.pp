@@ -20,6 +20,7 @@ class winbind (
   $krb5_kdc                             = $::winbind::params::krb5_kdc,
   $krb5_renew_lifetime                  = $::winbind::params::krb5_renew_lifetime,
   $krb5_ticket_lifetime                 = $::winbind::params::krb5_ticket_lifetime,
+  $manage_messagebus_service            = $::winbind::params::manage_messagebus_service,
   $manage_oddjob_service                = $::winbind::params::manage_oddjob_service,
   $oddjobd_homdir_mask                  = $::winbind::params::oddjobd_homdir_mask,
   $pam_cached_login                     = $::winbind::params::pam_cached_login,
@@ -145,6 +146,7 @@ class winbind (
     fail('krb5_forwardable must be a true or false')
   }
   validate_bool($manage_oddjob_service)
+  validate_bool($manage_messagebus_service)
 
 
   # use the install -> config -> service model
