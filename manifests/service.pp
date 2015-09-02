@@ -9,9 +9,11 @@ class winbind::service {
           before => Service['oddjobd'],
         }
 
-        service { 'oddjobd':
-          ensure => 'running',
-          enable => true,
+        if $::winbind::manage_oddjob_service == true {
+          service { 'oddjobd':
+            ensure => 'running',
+            enable => true,
+          }
         }
 
         service { 'winbind':
@@ -26,10 +28,12 @@ class winbind::service {
           enable => true,
         }
 
-        service { 'oddjobd':
-          ensure => 'running',
-          name   => 'oddjobd.service',
-          enable => true,
+        if $::winbind::manage_oddjob_service == true {
+          service { 'oddjobd':
+            ensure => 'running',
+            name   => 'oddjobd.service',
+            enable => true,
+          }
         }
 
       } # end else

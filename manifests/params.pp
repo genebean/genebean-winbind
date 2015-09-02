@@ -8,6 +8,7 @@ class winbind::params {
   $krb5_kdc                             = 'FILE:/var/log/krb5kdc.log'
   $krb5_renew_lifetime                  = '7d'
   $krb5_ticket_lifetime                 = '24h'
+  $manage_oddjob_service                = true
   $oddjobd_homdir_mask                  = '0077'
   $package_ensure                       = 'latest'
   $pam_cached_login                     = 'yes'
