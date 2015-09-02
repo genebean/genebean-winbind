@@ -3,7 +3,7 @@ class winbind::install {
   case $::operatingsystemmajrelease {
     '5'     : {
       package { 'samba3x-winbind':
-        ensure => latest,
+        ensure => $::winbind::package_ensure,
       }
     }
 
@@ -11,7 +11,7 @@ class winbind::install {
       $packages = ['samba-winbind-clients', 'oddjob-mkhomedir']
 
       package { $packages:
-        ensure => 'latest',
+        ensure => $::winbind::package_ensure,
       }
     }
 
