@@ -21,6 +21,7 @@ class winbind (
   $krb5_renew_lifetime                  = $::winbind::params::krb5_renew_lifetime,
   $krb5_ticket_lifetime                 = $::winbind::params::krb5_ticket_lifetime,
   $oddjobd_homdir_mask                  = $::winbind::params::oddjobd_homdir_mask,
+  $package_ensure                       = $::winbind::params::package_ensure,
   $pam_cached_login                     = $::winbind::params::pam_cached_login,
   $pam_debug_state                      = $::winbind::params::pam_debug_state,
   $pam_debug                            = $::winbind::params::pam_debug,
