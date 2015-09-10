@@ -1,8 +1,8 @@
 # Controls the services related to winbind
 class winbind::service {
   case $::osfamily {
-    RedHat  : {
-      if ($::operatingsystemmajrelease < 7) {
+    'RedHat'  : {
+      if ($::operatingsystemmajrelease != '7') {
         if $::winbind::manage_messagebus_service == true {
           service { 'messagebus':
             ensure => 'running',
