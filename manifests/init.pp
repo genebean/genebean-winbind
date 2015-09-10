@@ -57,7 +57,7 @@ class winbind (
   $smb_winbind_separator                = $::winbind::params::smb_winbind_separator,
   $smb_winbind_use_default_domain       = $::winbind::params::smb_winbind_use_default_domain,
   $smb_workgroup                        = $::winbind::params::smb_workgroup,
-  # ling:endignore
+  # lint:endignore
   ) inherits ::winbind::params {
   # validate parameters
   include stdlib
