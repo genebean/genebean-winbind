@@ -20,21 +20,21 @@ describe 'winbind::config' do
       }"
     end
 
-    it 'should set pam_require_membership_of' do
+    it 'should set require_membership_of in pam_winbind.conf' do
       should contain_file('/etc/security/pam_winbind.conf').with_content(/require_membership_of = sysadmins,iso-scans/)
     end
 
-    it 'should set smb_realm in smb.conf' do
+    it 'should use $smb_realm in smb.conf' do
       should contain_file('/etc/samba/smb.conf').with_content(/realm                          = AD.EXAMPLE.COM/)
     end
 
-    it 'should set smb_realm in krb5.conf' do
+    it 'should use $smb_realm in krb5.conf' do
       should contain_file('/etc/krb5.conf').with_content(/AD.EXAMPLE.COM = {/)
       should contain_file('/etc/krb5.conf').with_content(/\ \.ad.example.com = AD.EXAMPLE.COM/)
       should contain_file('/etc/krb5.conf').with_content(/\ ad.example.com = AD.EXAMPLE.COM/)
     end
 
-    it 'should set smb_workgroup in smb.conf' do
+    it 'should use $smb_workgroup in smb.conf' do
       should contain_file('/etc/samba/smb.conf').with_content(/workgroup                      = AD/)
     end
 
