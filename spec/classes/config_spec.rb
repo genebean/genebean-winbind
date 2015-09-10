@@ -35,7 +35,7 @@ describe 'winbind::config' do
     end
 
     it 'should set smb_workgroup in smb.conf' do
-      should contain_file('/etc/samba/smb.conf').with_content(/workgroup                          = AD/)
+      should contain_file('/etc/samba/smb.conf').with_content(/workgroup                      = AD/)
     end
 
   end
