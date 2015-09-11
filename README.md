@@ -1,4 +1,6 @@
-[![Puppet Forge][pf-img]][pf-link] [![GitHub tag][gh-tag-img]][gh-link]
+[![Build Status][travis-img-master]][travis-ci]
+[![Puppet Forge][pf-img]][pf-link]
+[![GitHub tag][gh-tag-img]][gh-link]
 
 # winbind
 
@@ -15,14 +17,13 @@
 
 ## Overview
 
-This module will configure winbind for joining Active Directory. Tests have not
-been implemented yet but will be. This module is also designed with using hiera
-in mind.
+This module will configure winbind for joining Active Directory. This module is
+also designed with using hiera in mind.
 
 
 ## Setup Requirements
 
-The conifguration used in this module requires Samba >= 3.6.
+The configuration used in this module requires Samba >= 3.6.
 
 
 ## Beginning with winbind
@@ -30,7 +31,7 @@ The conifguration used in this module requires Samba >= 3.6.
 ### Usage
 
 This module DOES NOT join your machine to AD. This is because I have not found
-a secure way to do the joins since it requries a privledged account and its
+a secure way to do the joins since it requires a privileged account and its
 password as part of the join. Once you have run this module at least once you
 can join your domain by executing the following pair of commands:
 
@@ -42,7 +43,7 @@ authconfig --enablemkhomedir --enablewinbind --enablewinbindauth --update
 
 ### Parameters
 
-There is a paramter that corresponds directly to each setting in the four
+There is a parameter that corresponds directly to each setting in the four
 configuration files that get edited by this module. Each is prefixed
 so that you know which file it effects:
 
@@ -52,7 +53,7 @@ so that you know which file it effects:
 * oddjobd = /etc/oddjobd.conf.d/oddjobd-mkhomedir.conf
 
 The full list of parameters is listed at the top of the [`init.pp`][init.pp] file.
-A fully functional setup should be atainable by providing values for the
+A fully functional setup should be attainable by providing values for the
 following three parameters:
 
 `pam_require_membership_of`
@@ -67,6 +68,20 @@ This is the short name of your domain.
 
 This is the long name of your domain. It is also used in krb5.conf for the
 `realms` and `domain_realms` settings.
+
+#### Additional Parameters
+
+`manage_messagebus_service`
+
+Allows disabling the management of the messagebus service. Defaults to `true`.
+
+`manage_oddjob_service`
+
+Allows disabling the management of the oddjobd service. Defaults to `true`.
+
+`package_ensure`
+
+Defines the ensure setting passed to all managed packages. Defaults to `latest`.
 
 
 ## Limitations
@@ -102,8 +117,16 @@ can be found in the root of the module.
 Pull requests are welcome!
 
 
+## Contributors
+
+* Adam Stephens (@adamcstephens) - Added support for toggling service management
+  and overriding the package ensure setting
+
+
 [gh-tag-img]: https://img.shields.io/github/tag/genebean/genebean-winbind.svg
 [gh-link]: https://github.com/genebean/genebean-winbind
 [init.pp]: https://github.com/genebean/genebean-winbind/blob/master/manifests/init.pp
 [pf-img]: https://img.shields.io/puppetforge/v/genebean/winbind.svg
 [pf-link]: https://forge.puppetlabs.com/genebean/winbind
+[travis-ci]: https://travis-ci.org/genebean/genebean-winbind
+[travis-img-master]: https://img.shields.io/travis/genebean/genebean-winbind/master.svg

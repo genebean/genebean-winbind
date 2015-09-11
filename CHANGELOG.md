@@ -1,4 +1,11 @@
-# Changelog
+[![GitHub tag][gh-tag-img]][gh-link]
+
+## 1.0.0 2015-09-10
+
+* Added support for toggling service management and
+  overriding the package ensure setting (thanks Adam Stephens)
+* Added a full test suite and Travis-CI support
+* Updated manifests for Puppet 4 support
 
 ## 0.4.0 2015-05-04
 
@@ -25,3 +32,6 @@
 ## 0.2.0
 
 * Initial working version
+
+[gh-tag-img]: https://img.shields.io/github/tag/genebean/genebean-winbind.svg?label=newest%20tag
+[gh-link]: https://github.com/genebean/genebean-winbind
