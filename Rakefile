@@ -9,8 +9,10 @@ exclude_paths = [
   "spec/**/*",
 ]
 
-PuppetLint.configuration.log_format = "%{path}:%{linenumber}:%{check}:%{KIND}:%{message}"
+PuppetLint.configuration.fail_on_warnings = true
 PuppetLint.configuration.ignore_paths = exclude_paths
+PuppetLint.configuration.log_format = "%{path}:%{linenumber}:%{check}:%{KIND}:%{message}"
+
 PuppetSyntax.exclude_paths = exclude_paths
 
 desc "Validate manifests, templates, and ruby files"
@@ -31,3 +33,4 @@ task :tests do
   Rake::Task[:validate].invoke
   Rake::Task[:spec].invoke
 end
+

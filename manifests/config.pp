@@ -43,9 +43,9 @@ class winbind::config (
   $smb_winbind_separator                = $::winbind::smb_winbind_separator,
   $smb_winbind_use_default_domain       = $::winbind::smb_winbind_use_default_domain,
   $smb_workgroup                        = $::winbind::smb_workgroup,
-  # ling:endignore
+  # lint:endignore
   ){
-    file { '/etc/krb5.conf':
+  file { '/etc/krb5.conf':
     ensure  => 'file',
     owner   => 'root',
     group   => 'root',
