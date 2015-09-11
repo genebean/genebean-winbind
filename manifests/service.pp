@@ -1,9 +1,12 @@
 # Controls the services related to winbind
-class winbind::service {
+class winbind::service (
+  $manage_messagebus_service = $::winbind::manage_messagebus_service,
+  $manage_oddjob_service     = $::winbind::manage_oddjob_service,
+  ) {
   case $::osfamily {
     'RedHat'  : {
       if ($::operatingsystemmajrelease != '7') {
-        if $::winbind::manage_messagebus_service == true {
+        if ($manage_messagebus_service == true) {
           service { 'messagebus':
             ensure => 'running',
             enable => true,
@@ -11,7 +14,7 @@ class winbind::service {
           }
         }
 
-        if $::winbind::manage_oddjob_service == true {
+        if ($manage_oddjob_service == true) {
           service { 'oddjobd':
             ensure => 'running',
             enable => true,
@@ -30,7 +33,7 @@ class winbind::service {
           enable => true,
         }
 
-        if $::winbind::manage_oddjob_service == true {
+        if ($manage_oddjob_service == true) {
           service { 'oddjobd':
             ensure => 'running',
             name   => 'oddjobd.service',

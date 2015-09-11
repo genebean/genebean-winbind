@@ -1,9 +1,11 @@
 # Installs packages required to utilize winbind for joining Active Directory
-class winbind::install {
+class winbind::install (
+  $package_ensure = $::winbind::package_ensure,
+  ) {
   case $::operatingsystemmajrelease {
     '5'     : {
       package { 'samba3x-winbind':
-        ensure => $::winbind::package_ensure,
+        ensure => $package_ensure,
       }
     }
 
@@ -11,7 +13,7 @@ class winbind::install {
       $packages = ['samba-winbind-clients', 'oddjob-mkhomedir']
 
       package { $packages:
-        ensure => $::winbind::package_ensure,
+        ensure => $package_ensure,
       }
     }
 

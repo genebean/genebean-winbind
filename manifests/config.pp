@@ -45,7 +45,7 @@ class winbind::config (
   $smb_workgroup                        = $::winbind::smb_workgroup,
   # lint:endignore
   ){
-    file { '/etc/krb5.conf':
+  file { '/etc/krb5.conf':
     ensure  => 'file',
     owner   => 'root',
     group   => 'root',
