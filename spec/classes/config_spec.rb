@@ -25,7 +25,7 @@ describe 'winbind::config' do
     end
 
     it 'should use $smb_realm in smb.conf' do
-      should contain_file('/etc/samba/smb.conf').with_content(/realm                          = AD.EXAMPLE.COM/)
+      should contain_file('/etc/samba/smb.conf').with_content(/realm\s+ = AD.EXAMPLE.COM/)
     end
 
     it 'should use $smb_realm in krb5.conf' do
@@ -35,7 +35,12 @@ describe 'winbind::config' do
     end
 
     it 'should use $smb_workgroup in smb.conf' do
-      should contain_file('/etc/samba/smb.conf').with_content(/workgroup                      = AD/)
+      should contain_file('/etc/samba/smb.conf').with_content(/workgroup\s+ = AD/)
+    end
+
+    it 'should manage oddjobd-mkhomedir.conf' do
+      should contain_file('/etc/oddjobd.conf.d/oddjobd-mkhomedir.conf').with_content(/This file is managed by Puppet/)
+      should contain_file('/etc/oddjobd.conf.d/oddjobd-mkhomedir.conf').with_content(/<oddjobconfig>/)
     end
 
   end
