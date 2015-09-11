@@ -57,7 +57,7 @@ class winbind (
   $smb_winbind_separator                = $::winbind::params::smb_winbind_separator,
   $smb_winbind_use_default_domain       = $::winbind::params::smb_winbind_use_default_domain,
   $smb_workgroup                        = $::winbind::params::smb_workgroup,
-  # ling:endignore
+  # lint:endignore
   ) inherits ::winbind::params {
   # validate parameters
   include stdlib
@@ -153,50 +153,7 @@ class winbind (
   # use the install -> config -> service model
   anchor {'::winbind::start': } ->
   class { '::winbind::install': } ->
-  class { '::winbind::config':
-  pam_debug                            => $pam_debug,
-  pam_debug_state                      => $pam_debug_state,
-  pam_cached_login                     => $pam_cached_login,
-  pam_krb5_auth                        => $pam_krb5_auth,
-  pam_krb5_ccache_type                 => $pam_krb5_ccache_type,
-  pam_require_membership_of            => $pam_require_membership_of,
-  pam_warn_pwd_expire                  => $pam_warn_pwd_expire,
-  pam_silent                           => $pam_silent,
-  pam_mkhomedir                        => $pam_mkhomedir,
-  smb_workgroup                        => $smb_workgroup,
-  smb_realm                            => $smb_realm,
-  smb_encrypt_passwords                => $smb_encrypt_passwords,
-  smb_log_level                        => $smb_log_level,
-  smb_syslog                           => $smb_syslog,
-  smb_server_string                    => $smb_server_string,
-  smb_security                         => $smb_security,
-  smb_log_file                         => $smb_log_file,
-  smb_max_log_size                     => $smb_max_log_size,
-  smb_printcap_name                    => $smb_printcap_name,
-  smb_printing                         => $smb_printing,
-  smb_winbind_enum_users               => $smb_winbind_enum_users,
-  smb_winbind_enum_groups              => $smb_winbind_enum_groups,
-  smb_winbind_use_default_domain       => $smb_winbind_use_default_domain,
-  smb_winbind_nss_info                 => $smb_winbind_nss_info,
-  smb_winbind_normalize_names          => $smb_winbind_normalize_names,
-  smb_winbind_offline_logon            => $smb_winbind_offline_logon,
-  smb_winbind_separator                => $smb_winbind_separator,
-  smb_template_homedir                 => $smb_template_homedir,
-  smb_template_shell                   => $smb_template_shell,
-  smb_idmap_config_default_backend     => $smb_idmap_config_default_backend,
-  smb_idmap_config_default_range_start => $smb_idmap_config_default_range_start,
-  smb_idmap_config_default_range_end   => $smb_idmap_config_default_range_end,
-  smb_idmap_config_default_rangesize   => $smb_idmap_config_default_rangesize,
-  krb5_default                         => $krb5_default,
-  krb5_kdc                             => $krb5_kdc,
-  krb5_admin_server                    => $krb5_admin_server,
-  krb5_dns_lookup_realm                => $krb5_dns_lookup_realm,
-  krb5_dns_lookup_kdc                  => $krb5_dns_lookup_kdc,
-  krb5_ticket_lifetime                 => $krb5_ticket_lifetime,
-  krb5_renew_lifetime                  => $krb5_renew_lifetime,
-  krb5_forwardable                     => $krb5_forwardable,
-  oddjobd_homdir_mask                  => $oddjobd_homdir_mask,
-  } ->
+  class { '::winbind::config': } ->
   class { '::winbind::service': } ->
   anchor {'::winbind::end': }
 
