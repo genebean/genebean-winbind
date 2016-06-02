@@ -1,4 +1,4 @@
-# Configures settings associated with using winbind for joining Active Directory
+# Configures settings associated with using winbind to join Active Directory
 class winbind::config (
   # lint:ignore:80chars
   $krb5_admin_server                    = $::winbind::krb5_admin_server,

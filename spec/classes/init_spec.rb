@@ -5,10 +5,11 @@ describe 'winbind' do
   describe 'on Red Hat' do
     let :facts do
       {
-        :kernel          => 'Linux',
-        :osfamily        => 'RedHat',
-        :operatingsystem => 'RedHat',
-        :fqdn            => 'SOMEHOST.ad.example.com'
+        :kernel                    => 'Linux',
+        :osfamily                  => 'RedHat',
+        :operatingsystem           => 'RedHat',
+        :operatingsystemmajrelease => '7',
+        :fqdn                      => 'SOMEHOST.ad.example.com'
       }
     end
 
@@ -22,10 +23,11 @@ describe 'winbind' do
     context 'with domain and login restrictions set' do
       let :facts do
         {
-          :kernel          => 'Linux',
-          :osfamily        => 'RedHat',
-          :operatingsystem => 'RedHat',
-          :fqdn            => 'SOMEHOST.ad.example.com'
+          :kernel                    => 'Linux',
+          :osfamily                  => 'RedHat',
+          :operatingsystem           => 'RedHat',
+          :operatingsystemmajrelease => '7',
+          :fqdn                      => 'SOMEHOST.ad.example.com'
         }
       end
 
@@ -50,10 +52,11 @@ describe 'winbind' do
     context 'with package_ensure set to installed' do
       let :facts do
         {
-          :kernel          => 'Linux',
-          :osfamily        => 'RedHat',
-          :operatingsystem => 'RedHat',
-          :fqdn            => 'SOMEHOST.ad.example.com'
+          :kernel                    => 'Linux',
+          :osfamily                  => 'RedHat',
+          :operatingsystem           => 'RedHat',
+          :operatingsystemmajrelease => '7',
+          :fqdn                      => 'SOMEHOST.ad.example.com'
         }
       end
 
@@ -73,10 +76,11 @@ describe 'winbind' do
     context 'with service management disabled' do
       let :facts do
         {
-          :kernel          => 'Linux',
-          :osfamily        => 'RedHat',
-          :operatingsystem => 'RedHat',
-          :fqdn            => 'SOMEHOST.ad.example.com'
+          :kernel                    => 'Linux',
+          :osfamily                  => 'RedHat',
+          :operatingsystem           => 'RedHat',
+          :operatingsystemmajrelease => '7',
+          :fqdn                      => 'SOMEHOST.ad.example.com'
         }
       end
 

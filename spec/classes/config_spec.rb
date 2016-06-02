@@ -5,10 +5,11 @@ describe 'winbind::config' do
   describe 'with domain and login restrictions set' do
     let :facts do
       {
-        :kernel          => 'Linux',
-        :osfamily        => 'RedHat',
-        :operatingsystem => 'RedHat',
-        :fqdn            => 'SOMEHOST.ad.example.com'
+        :kernel                    => 'Linux',
+        :osfamily                  => 'RedHat',
+        :operatingsystem           => 'RedHat',
+        :operatingsystemmajrelease => '7',
+        :fqdn                      => 'SOMEHOST.ad.example.com'
       }
     end
 
