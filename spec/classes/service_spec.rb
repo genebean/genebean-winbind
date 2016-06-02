@@ -89,4 +89,24 @@ describe 'winbind::service' do
 
   end
 
+  context 'on SLES 12 with defaults' do
+    let :facts do
+      {
+        :kernel            => 'Linux',
+        :osfamily          => 'Suse',
+        :operatingsystem   => 'SLES',
+        :lsbmajdistrelease => '12',
+      }
+    end
+
+    let :pre_condition do
+      "class {'winbind': }"
+    end
+
+    # Make sure the right services are managed.
+    it { should contain_service('winbind').with_ensure('running') }
+    it { should have_service_resource_count(1) }
+
+  end
+
 end
