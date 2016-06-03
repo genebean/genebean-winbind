@@ -9,6 +9,7 @@ class winbind::config (
   $krb5_kdc                             = $::winbind::krb5_kdc,
   $krb5_renew_lifetime                  = $::winbind::krb5_renew_lifetime,
   $krb5_ticket_lifetime                 = $::winbind::krb5_ticket_lifetime,
+  $manage_oddjob_service                = $::winbind::manage_oddjob_service,
   $oddjobd_homdir_mask                  = $::winbind::oddjobd_homdir_mask,
   $pam_cached_login                     = $::winbind::pam_cached_login,
   $pam_debug_state                      = $::winbind::pam_debug_state,
@@ -54,13 +55,15 @@ class winbind::config (
     notify  => Service['winbind'],
   }
 
-  file { '/etc/oddjobd.conf.d/oddjobd-mkhomedir.conf':
-    ensure  => 'file',
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    content => template('winbind/oddjobd-mkhomedir.conf.erb'),
-    notify  => Service[['oddjobd', 'winbind',]],
+  if $::osfamily == 'RedHat' {
+    file { '/etc/oddjobd.conf.d/oddjobd-mkhomedir.conf':
+      ensure  => 'file',
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0644',
+      content => template('winbind/oddjobd-mkhomedir.conf.erb'),
+      notify  => Service[['oddjobd', 'winbind',]],
+    }
   }
 
   file { '/etc/samba/smb.conf':

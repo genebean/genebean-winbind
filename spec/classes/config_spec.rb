@@ -83,11 +83,6 @@ describe 'winbind::config' do
       should contain_file('/etc/samba/smb.conf').with_content(/workgroup\s+ = AD/)
     end
 
-    it 'should manage oddjobd-mkhomedir.conf' do
-      should contain_file('/etc/oddjobd.conf.d/oddjobd-mkhomedir.conf').with_content(/This file is managed by Puppet/)
-      should contain_file('/etc/oddjobd.conf.d/oddjobd-mkhomedir.conf').with_content(/<oddjobconfig>/)
-    end
-
   end
 
 end
