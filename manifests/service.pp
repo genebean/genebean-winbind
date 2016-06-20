@@ -1,7 +1,9 @@
 # Controls the services related to winbind
 class winbind::service (
+  $enable_sharing            = $::winbind::enable_sharing,
   $manage_messagebus_service = $::winbind::manage_messagebus_service,
   $manage_oddjob_service     = $::winbind::manage_oddjob_service,
+  $manage_samba_service      = $::winbind::manage_samba_service,
   ) {
   case $::osfamily {
     'RedHat'  : {
@@ -21,18 +23,19 @@ class winbind::service (
           }
         }
 
+        if ($enable_sharing == true and $manage_samba_service == true) {
+          service { 'smb':
+            ensure => 'running',
+            enable => true,
+          }
+        }
+
         service { 'winbind':
           ensure => 'running',
           enable => true,
         }
 
       } else {
-        service { 'winbind':
-          ensure => 'running',
-          name   => 'winbind.service',
-          enable => true,
-        }
-
         if ($manage_oddjob_service == true) {
           service { 'oddjobd':
             ensure => 'running',
@@ -41,10 +44,30 @@ class winbind::service (
           }
         }
 
+        if ($enable_sharing == true and $manage_samba_service == true) {
+          service { 'smb':
+            ensure => 'running',
+            enable => true,
+          }
+        }
+
+        service { 'winbind':
+          ensure => 'running',
+          name   => 'winbind.service',
+          enable => true,
+        }
+
       } # end else
     } # end RedHat
 
     'Suse' : {
+      if ($enable_sharing == true and $manage_samba_service == true) {
+        service { 'smb':
+          ensure => 'running',
+          enable => true,
+        }
+      }
+      
       service { 'winbind':
         ensure => 'running',
         enable => true,

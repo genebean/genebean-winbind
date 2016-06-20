@@ -1,5 +1,6 @@
 # Installs packages required to utilize winbind for joining Active Directory
 class winbind::install (
+  $enable_sharing = $::winbind::enable_sharing,
   $package_ensure = $::winbind::package_ensure,
   ) {
   case $::osfamily {
@@ -9,6 +10,12 @@ class winbind::install (
           package { 'samba3x-winbind':
             ensure => $package_ensure,
           }
+
+          if ($enable_sharing) {
+            package { 'samba3x':
+              ensure => $package_ensure,
+            }
+          }
         }
 
         default : {
@@ -16,6 +23,12 @@ class winbind::install (
 
           package { $packages:
             ensure => $package_ensure,
+          }
+
+          if ($enable_sharing) {
+            package { 'samba':
+              ensure => $package_ensure,
+            }
           }
         }
 
@@ -25,6 +38,12 @@ class winbind::install (
     'Suse' : {
       package { 'samba-winbind':
         ensure => $package_ensure,
+      }
+
+      if ($enable_sharing) {
+        package { 'samba':
+          ensure => $package_ensure,
+        }
       }
     } # end Suse
 

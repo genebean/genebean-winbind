@@ -88,6 +88,7 @@ describe 'winbind' do
         "class {'winbind':
           manage_messagebus_service => false,
           manage_oddjob_service     => false,
+          manage_samba_service      => false,
         }"
       end
 
@@ -95,11 +96,42 @@ describe 'winbind' do
         should contain_class('winbind::service').with(
           'manage_messagebus_service' => false,
           'manage_oddjob_service'     => false,
+          'manage_samba_service'      => false,
         )
       end
 
     end
 
+    context 'with sharing enabled' do
+      let :facts do
+        {
+          :kernel                    => 'Linux',
+          :osfamily                  => 'RedHat',
+          :operatingsystem           => 'RedHat',
+          :operatingsystemmajrelease => '7',
+          :fqdn                      => 'SOMEHOST.ad.example.com'
+        }
+      end
+
+      let :pre_condition do
+        "class {'winbind':
+          enable_sharing => true,
+        }"
+      end
+
+      it 'should pass parameters to winbind::install' do
+        should contain_class('winbind::install').with(
+          'enable_sharing' => true,
+        )
+      end
+
+      it 'should pass parameters to winbind::service' do
+        should contain_class('winbind::service').with(
+          'enable_sharing' => true,
+        )
+      end
+
+    end
 
   end
 
@@ -189,6 +221,7 @@ describe 'winbind' do
         "class {'winbind':
           manage_messagebus_service => false,
           manage_oddjob_service     => false,
+          manage_samba_service      => false,
         }"
       end
 
@@ -196,6 +229,38 @@ describe 'winbind' do
         should contain_class('winbind::service').with(
           'manage_messagebus_service' => false,
           'manage_oddjob_service'     => false,
+          'manage_samba_service'      => false,
+        )
+      end
+
+    end
+
+    context 'with sharing enabled' do
+      let :facts do
+        {
+          :kernel            => 'Linux',
+          :osfamily          => 'Suse',
+          :operatingsystem   => 'SLES',
+          :lsbmajdistrelease => '12',
+          :fqdn              => 'SOMEHOST.ad.example.com'
+        }
+      end
+
+      let :pre_condition do
+        "class {'winbind':
+          enable_sharing => true,
+        }"
+      end
+
+      it 'should pass parameters to winbind::install' do
+        should contain_class('winbind::install').with(
+          'enable_sharing' => true,
+        )
+      end
+
+      it 'should pass parameters to winbind::service' do
+        should contain_class('winbind::service').with(
+          'enable_sharing' => true,
         )
       end
 

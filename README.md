@@ -17,8 +17,9 @@
 
 ## Overview
 
-This module will configure winbind for joining Active Directory. This module is
-also designed with using hiera in mind.
+This module will configure winbind for joining Active Directory and is designed
+with hiera in mind. It will also, optionally, allow you to configure SMB shares
+since `smb.conf` is used for both purposes.
 
 
 ## Setup Requirements
@@ -31,9 +32,9 @@ The configuration used in this module requires Samba >= 3.6.
 ### Usage
 
 This module DOES NOT join your machine to AD. This is because I have not found
-a secure way to do the joins since it requires a privileged account and its
-password as part of the join. Once you have run this module at least once you
-can join your domain by executing the following pair of commands:
+a secure way to do the joins since they require a privileged account and its
+password. Once you have run this module at least once you can join your domain
+by executing the following pair of commands:
 
 ```bash
 # On Red Hat
@@ -45,7 +46,7 @@ pam-config --add --winbind --mkhomedir --mkhomedir-umask=0077
 net ads join -U yourADuserName
 ```
 
-#### Example use in a Puppet profile
+#### Example of a Puppet profile to configure winbind
 
 1. Create a profile similar to:
 
@@ -124,6 +125,56 @@ net ads join -U yourADuserName
 7. Rerun `puppet agent -t`.
 
 8. Enjoy.
+
+#### Configuring SMB shares
+
+The settings above will get you on a domain. If you want to supplement those
+with one or more SMB shares you will need the following additional configuration
+settings:
+
+1. Add `winbind::enable_sharing : true` to your node's file in hiera
+2. Create a share by either placing files with the needed settings in
+   `/etc/samba/smb.conf.d/` OR by using a hash. Using a hash is the recommended
+   method.
+
+   If you choose to use files, their names will need to be listed in an array
+   as part of `winbind::smb_includes_files`
+
+   If you choose to use a hash, you can either put it in a manifest like so:
+
+   ```puppet
+   $my_smb_settings_hash = {
+     'share1' => {
+       'path'      => '/tmp',
+       'browsable' => 'yes',
+       'read only' => 'yes'
+     },
+     'share2' => {
+       'path'      => '/mnt',
+       'browsable' => 'no',
+       'read only' => 'yes'
+     },
+   }
+
+   class { winbind:
+     smb_settings_hash => $my_smb_settings_hash,
+   }
+   ```
+
+   Or if you choose to use hiera the same hash would look like this:
+
+   ```yaml
+   ---
+   winbind::smb_settings_hash:
+     share1:
+       path      : '/tmp'
+       browsable : 'yes'
+       read only : 'yes'
+     share2:
+       path      : '/mnt'
+       browsable : 'no'
+       read only : 'yes'
+   ```
 
 ### Parameters
 

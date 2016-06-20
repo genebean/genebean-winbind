@@ -28,3 +28,11 @@
   idmap config *:backend         = <%= @smb_idmap_config_default_backend %>
   idmap config *:range           = <%= @smb_idmap_config_default_range_start %>-<%= @smb_idmap_config_default_range_end %>
   idmap config *:rangesize       = <%= @smb_idmap_config_default_rangesize %>
+
+  # settings provided as a hash to Puppet
+  include                        = <%= @smb_include_dir %>/smb-extras.conf
+
+  # user defined include files
+<% @smb_includes_files.each do |include_file| -%>
+  include                        = <%= @smb_include_dir %>/<%= include_file %>.conf
+<% end %>

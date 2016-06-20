@@ -9,7 +9,8 @@
   "issues_url": "https://github.com/genebean/genebean-winbind/issues",
   "tags": [ "winbind", "smb" ],
   "dependencies": [
-    { "name": "puppetlabs/stdlib", "version_requirement": ">= 4.4.0" }
+    { "name": "puppetlabs/inifile", "version_requirement": ">= 1.4.2" },
+    { "name": "puppetlabs/stdlib",  "version_requirement": ">= 4.4.0" }
   ],
   "requirements": [
     { "name": "puppet", "version_requirement": ">= 2.7.0 < 5.0.0" }

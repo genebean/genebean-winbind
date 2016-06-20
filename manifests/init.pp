@@ -12,6 +12,7 @@
 #
 class winbind (
   # lint:ignore:80chars
+  $enable_sharing                       = $::winbind::params::enable_sharing,
   $krb5_admin_server                    = $::winbind::params::krb5_admin_server,
   $krb5_default                         = $::winbind::params::krb5_default,
   $krb5_dns_lookup_kdc                  = $::winbind::params::krb5_dns_lookup_kdc,
@@ -22,6 +23,7 @@ class winbind (
   $krb5_ticket_lifetime                 = $::winbind::params::krb5_ticket_lifetime,
   $manage_messagebus_service            = $::winbind::params::manage_messagebus_service,
   $manage_oddjob_service                = $::winbind::params::manage_oddjob_service,
+  $manage_samba_service                 = $::winbind::params::manage_samba_service,
   $oddjobd_homdir_mask                  = $::winbind::params::oddjobd_homdir_mask,
   $package_ensure                       = $::winbind::params::package_ensure,
   $pam_cached_login                     = $::winbind::params::pam_cached_login,
@@ -38,6 +40,8 @@ class winbind (
   $smb_idmap_config_default_range_end   = $::winbind::params::smb_idmap_config_default_range_end,
   $smb_idmap_config_default_rangesize   = $::winbind::params::smb_idmap_config_default_rangesize,
   $smb_idmap_config_default_range_start = $::winbind::params::smb_idmap_config_default_range_start,
+  $smb_include_dir                      = $::winbind::params::smb_includes_dir,
+  $smb_includes_files                   = $::winbind::params::smb_includes_files,
   $smb_log_file                         = $::winbind::params::smb_log_file,
   $smb_log_level                        = $::winbind::params::smb_log_level,
   $smb_max_log_size                     = $::winbind::params::smb_max_log_size,
@@ -46,6 +50,7 @@ class winbind (
   $smb_realm                            = $::winbind::params::smb_realm,
   $smb_security                         = $::winbind::params::smb_security,
   $smb_server_string                    = $::winbind::params::smb_server_string,
+  $smb_settings_hash                    = $::winbind::params::smb_settings_hash,
   $smb_syslog                           = $::winbind::params::smb_syslog,
   $smb_template_homedir                 = $::winbind::params::smb_template_homedir,
   $smb_template_shell                   = $::winbind::params::smb_template_shell,
@@ -95,6 +100,7 @@ class winbind (
 
   # arrays
   validate_array($pam_require_membership_of)
+  validate_array($smb_includes_files)
 
   # numbers
   if ( !is_numeric($pam_warn_pwd_expire) ) {
