@@ -36,8 +36,13 @@ password as part of the join. Once you have run this module at least once you
 can join your domain by executing the following pair of commands:
 
 ```bash
+# On Red Hat
 net ads join -U yourADuserName
 authconfig --enablemkhomedir --enablewinbind --enablewinbindauth --update
+
+# on Suse
+pam-config --add --winbind --mkhomedir --mkhomedir-umask=0077
+net ads join -U yourADuserName
 ```
 
 
@@ -86,8 +91,7 @@ Defines the ensure setting passed to all managed packages. Defaults to `latest`.
 
 ## Limitations
 
-This module has only been tested on Red Hat 5 and CentOS 6 & 7 but that will be
-expanded some as time goes on.
+This module has only been tested on Red Hat 5, CentOS 6 & 7, and SLES 11 & 12.
 
 
 ## Troubleshooting
