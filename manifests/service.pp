@@ -44,6 +44,13 @@ class winbind::service (
       } # end else
     } # end RedHat
 
+    'Suse' : {
+      service { 'winbind':
+        ensure => 'running',
+        enable => true,
+      }
+    } # end Suse
+
     default : {
       fail("The ${::osfamily} OS family is not supported by this module yet.")
     }
