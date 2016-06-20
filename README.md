@@ -121,6 +121,7 @@ Pull requests are welcome!
 
 * Adam Stephens (@adamcstephens) - Added support for toggling service management
   and overriding the package ensure setting
+* Jake Spain (@thespain) - Added support for SLES 11 & 12
 
 
 [gh-tag-img]: https://img.shields.io/github/tag/genebean/genebean-winbind.svg
