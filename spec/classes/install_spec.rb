@@ -66,4 +66,48 @@ describe 'winbind::install' do
 
   end
 
+  context 'on SLES 12 with defaults' do
+    let :facts do
+      {
+        :kernel            => 'Linux',
+        :osfamily          => 'Suse',
+        :operatingsystem   => 'SLES',
+        :lsbmajdistrelease => '12',
+        :fqdn              => 'SOMEHOST.ad.example.com'
+      }
+    end
+
+    let :pre_condition do
+      "class {'winbind': }"
+    end
+
+    # Make sure package will be installed.
+    it { should contain_package('samba-winbind').with_ensure('latest') }
+    it { should have_package_resource_count(1) }
+
+  end
+
+  context 'on SLES 12 with package_ensure set to installed' do
+    let :facts do
+      {
+        :kernel            => 'Linux',
+        :osfamily          => 'Suse',
+        :operatingsystem   => 'SLES',
+        :lsbmajdistrelease => '12',
+        :fqdn              => 'SOMEHOST.ad.example.com'
+      }
+    end
+
+    let :pre_condition do
+      "class {'winbind':
+        package_ensure => 'installed',
+      }"
+    end
+
+    # Make sure package will be installed.
+    it { should contain_package('samba-winbind').with_ensure('installed') }
+    it { should have_package_resource_count(1) }
+
+  end
+
 end

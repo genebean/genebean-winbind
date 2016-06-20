@@ -2,21 +2,35 @@
 class winbind::install (
   $package_ensure = $::winbind::package_ensure,
   ) {
-  case $::operatingsystemmajrelease {
-    '5'     : {
-      package { 'samba3x-winbind':
+  case $::osfamily {
+    'RedHat' : {
+      case $::operatingsystemmajrelease {
+        '5'     : {
+          package { 'samba3x-winbind':
+            ensure => $package_ensure,
+          }
+        }
+
+        default : {
+          $packages = ['samba-winbind-clients', 'oddjob-mkhomedir']
+
+          package { $packages:
+            ensure => $package_ensure,
+          }
+        }
+
+      }
+    } # end RedHat
+
+    'Suse' : {
+      package { 'samba-winbind':
         ensure => $package_ensure,
       }
-    }
+    } # end Suse
 
     default : {
-      $packages = ['samba-winbind-clients', 'oddjob-mkhomedir']
-
-      package { $packages:
-        ensure => $package_ensure,
-      }
+      fail("The ${::osfamily} OS family is not supported by this module yet.")
     }
-
-  }
+  } # end osfamily
 
 }
