@@ -1,5 +1,9 @@
 [![GitHub tag][gh-tag-img]][gh-link]
 
+## 1.1.1 2016-08-12
+
+* Added support for SUSE (thanks Jake Spain)
+
 ## 1.0.0 2015-09-10
 
 * Added support for toggling service management and
