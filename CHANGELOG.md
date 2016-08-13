@@ -1,5 +1,9 @@
 [![GitHub tag][gh-tag-img]][gh-link]
 
+## 1.4.0 2016-08-03
+
+* Merged in PR #3 to help future proof version comparisons in `service.pp`
+
 ## 1.3.0 2016-08-13
 
 * Added support for configuring SMB shares since we already manage `smb.conf`
