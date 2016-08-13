@@ -7,7 +7,7 @@ class winbind::service (
   ) {
   case $::osfamily {
     'RedHat'  : {
-      if ($::operatingsystemmajrelease != '7') {
+      if versioncmp($::operatingsystemmajrelease, '7') < 0 {
         if ($manage_messagebus_service == true) {
           service { 'messagebus':
             ensure => 'running',
