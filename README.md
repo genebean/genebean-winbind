@@ -157,6 +157,7 @@ settings:
    }
 
    class { winbind:
+     enable_sharing    => true,
      smb_settings_hash => $my_smb_settings_hash,
    }
    ```
