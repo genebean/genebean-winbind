@@ -46,6 +46,38 @@ describe 'winbind::config' do
 
   end
 
+  describe 'with sharing enabled on RedHat' do
+    let :facts do
+      {
+        :kernel                    => 'Linux',
+        :osfamily                  => 'RedHat',
+        :operatingsystem           => 'RedHat',
+        :operatingsystemmajrelease => '7',
+        :fqdn                      => 'SOMEHOST.ad.example.com'
+      }
+    end
+
+    let :pre_condition do
+      "class {'winbind':
+        enable_sharing     => true,
+        smb_includes_files => [ 'share1', 'share2', ],
+      }"
+    end
+
+    it 'should create the directory smb.conf.d' do
+      should contain_file('/etc/samba/smb.conf.d').with_ensure('directory')
+    end
+
+    it 'should include share1.conf in smb.conf' do
+      should contain_file('/etc/samba/smb.conf').with_content(/include\s+ = \/etc\/samba\/smb.conf.d\/share1.conf/)
+    end
+
+    it 'should include share2.conf in smb.conf' do
+      should contain_file('/etc/samba/smb.conf').with_content(/include\s+ = \/etc\/samba\/smb.conf.d\/share2.conf/)
+    end
+
+  end
+
   describe 'with domain and login restrictions set on Suse' do
     let :facts do
       {
@@ -81,6 +113,38 @@ describe 'winbind::config' do
 
     it 'should use $smb_workgroup in smb.conf' do
       should contain_file('/etc/samba/smb.conf').with_content(/workgroup\s+ = AD/)
+    end
+
+  end
+
+  describe 'with sharing enabled on Suse' do
+    let :facts do
+      {
+        :kernel            => 'Linux',
+        :osfamily          => 'Suse',
+        :operatingsystem   => 'SLES',
+        :lsbmajdistrelease => '12',
+        :fqdn              => 'SOMEHOST.ad.example.com'
+      }
+    end
+
+    let :pre_condition do
+      "class {'winbind':
+        enable_sharing     => true,
+        smb_includes_files => [ 'share1', 'share2', ],
+      }"
+    end
+
+    it 'should create the directory smb.conf.d' do
+      should contain_file('/etc/samba/smb.conf.d').with_ensure('directory')
+    end
+
+    it 'should include share1.conf in smb.conf' do
+      should contain_file('/etc/samba/smb.conf').with_content(/include\s+ = \/etc\/samba\/smb.conf.d\/share1.conf/)
+    end
+
+    it 'should include share2.conf in smb.conf' do
+      should contain_file('/etc/samba/smb.conf').with_content(/include\s+ = \/etc\/samba\/smb.conf.d\/share2.conf/)
     end
 
   end

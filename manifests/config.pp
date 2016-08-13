@@ -1,4 +1,19 @@
 # Configures settings associated with using winbind to join Active Directory
+#
+# Example settings hash that could be included in local profile manifest:
+#
+#  $smb_settings_hash = {
+#    'share1' => {
+#      'path'      => '/tmp',
+#      'browsable' => 'yes',
+#      'read only' => 'yes'
+#    },
+#    'share2' => {
+#      'path'      => '/mnt',
+#      'browsable' => 'no',
+#      'read only' => 'yes'
+#    },
+#  }
 class winbind::config (
   # lint:ignore:80chars
   $krb5_admin_server                    = $::winbind::krb5_admin_server,
@@ -25,6 +40,8 @@ class winbind::config (
   $smb_idmap_config_default_range_end   = $::winbind::smb_idmap_config_default_range_end,
   $smb_idmap_config_default_rangesize   = $::winbind::smb_idmap_config_default_rangesize,
   $smb_idmap_config_default_range_start = $::winbind::smb_idmap_config_default_range_start,
+  $smb_include_dir                      = $::winbind::smb_includes_dir,
+  $smb_includes_files                   = $::winbind::smb_includes_files,
   $smb_log_file                         = $::winbind::smb_log_file,
   $smb_log_level                        = $::winbind::smb_log_level,
   $smb_max_log_size                     = $::winbind::smb_max_log_size,
@@ -33,6 +50,7 @@ class winbind::config (
   $smb_realm                            = $::winbind::smb_realm,
   $smb_security                         = $::winbind::smb_security,
   $smb_server_string                    = $::winbind::smb_server_string,
+  $smb_settings_hash                    = $::winbind::smb_settings_hash,
   $smb_syslog                           = $::winbind::smb_syslog,
   $smb_template_homedir                 = $::winbind::smb_template_homedir,
   $smb_template_shell                   = $::winbind::smb_template_shell,
@@ -45,7 +63,7 @@ class winbind::config (
   $smb_winbind_use_default_domain       = $::winbind::smb_winbind_use_default_domain,
   $smb_workgroup                        = $::winbind::smb_workgroup,
   # lint:endignore
-  ){
+  ) {
   file { '/etc/krb5.conf':
     ensure  => 'file',
     owner   => 'root',
@@ -75,6 +93,14 @@ class winbind::config (
     notify  => Service['winbind'],
   }
 
+  file { $smb_include_dir:
+    ensure => 'directory',
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0644',
+    notify => Service['winbind'],
+  }
+
   file { '/etc/security/pam_winbind.conf':
     ensure  => 'file',
     owner   => 'root',
@@ -82,6 +108,14 @@ class winbind::config (
     mode    => '0644',
     content => template('winbind/pam_winbind.conf.erb'),
     notify  => Service['winbind'],
+  }
+
+  if ($smb_settings_hash) {
+    validate_hash($smb_settings_hash)
+    $defaults = {
+      'path' => "${smb_include_dir}/smb-extras.conf"
+    }
+    create_ini_settings($smb_settings_hash, $defaults)
   }
 
 }

@@ -1,5 +1,6 @@
 # Default settings for parameters
 class winbind::params {
+  $enable_sharing                       = false
   $krb5_admin_server                    = 'FILE:/var/log/kadmind.log'
   $krb5_default                         = 'FILE:/var/log/krb5libs.log'
   $krb5_dns_lookup_kdc                  = true
@@ -13,6 +14,7 @@ class winbind::params {
     'Suse'  => false,
     default => true,
   }
+  $manage_samba_service                 = true
   $oddjobd_homdir_mask                  = '0077'
   $package_ensure                       = 'latest'
   $pam_cached_login                     = 'yes'
@@ -29,6 +31,8 @@ class winbind::params {
   $smb_idmap_config_default_range_end   = 19999999
   $smb_idmap_config_default_rangesize   = 1000000
   $smb_idmap_config_default_range_start = 1000000
+  $smb_includes_dir                     = '/etc/samba/smb.conf.d'
+  $smb_includes_files                   = []
   $smb_log_file                         = '/var/log/samba/%m'
   $smb_log_level                        = 0
   $smb_max_log_size                     = 0
@@ -37,6 +41,7 @@ class winbind::params {
   $smb_realm                            = 'EXAMPLE.COM'
   $smb_security                         = 'ads'
   $smb_server_string                    = $::hostname
+  $smb_settings_hash                    = undef
   $smb_syslog                           = 0
   $smb_template_homedir                 = '/home/%D/%U'
   $smb_template_shell                   = '/bin/bash'

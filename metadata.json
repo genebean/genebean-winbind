@@ -1,6 +1,6 @@
 {
   "name": "genebean-winbind",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "author": "Gene Liverman",
   "summary": "A Puppet module for configuring Winbind on a Linux host",
   "license": "BSD-3-Clause",
@@ -9,7 +9,8 @@
   "issues_url": "https://github.com/genebean/genebean-winbind/issues",
   "tags": [ "winbind", "smb" ],
   "dependencies": [
-    { "name": "puppetlabs/stdlib", "version_requirement": ">= 4.4.0" }
+    { "name": "puppetlabs/inifile", "version_requirement": ">= 1.4.2" },
+    { "name": "puppetlabs/stdlib",  "version_requirement": ">= 4.4.0" }
   ],
   "requirements": [
     { "name": "puppet", "version_requirement": ">= 2.7.0 < 5.0.0" }

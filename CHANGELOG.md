@@ -1,5 +1,9 @@
 [![GitHub tag][gh-tag-img]][gh-link]
 
+## 1.3.0 2016-08-13
+
+* Added support for configuring SMB shares since we already manage `smb.conf`
+
 ## 1.2.0 2016-08-12
 
 * Added a test on Travis CI that includes 3.x and the future parser
