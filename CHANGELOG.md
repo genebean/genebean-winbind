@@ -1,8 +1,18 @@
 [![GitHub tag][gh-tag-img]][gh-link]
 
+## 1.2.0 2016-08-12
+
+* Added a test on Travis CI that includes 3.x and the future parser
+
 ## 1.1.1 2016-08-12
 
+* Fixed issue where the Puppet 4.x build on Travis CI failed due to a gem's
+  version being incorrect
+
+## 1.1.0 2016-08-12
+
 * Added support for SUSE (thanks Jake Spain)
+* This release was pulled from the Forge due to errors fixed in 1.1.1
 
 ## 1.0.0 2015-09-10
 
