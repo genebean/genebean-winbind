@@ -65,7 +65,7 @@ class winbind (
   # lint:endignore
   ) inherits ::winbind::params {
   # validate parameters
-  include stdlib
+  include ::stdlib
 
   # strings
   validate_string($pam_debug)
