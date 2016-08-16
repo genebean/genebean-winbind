@@ -1,1 +1,1 @@
-include winbind
+include ::winbind
