@@ -1,6 +1,15 @@
 [![GitHub tag][gh-tag-img]][gh-link]
 
-## 1.4.0 2016-08-03
+## 1.5.0 2016-08-16
+
+* Added additional puppet-lint tests
+* Fixed 3 issues identified by new puppet-lint tests
+
+## 1.4.1 2016-08-13
+
+* Fixed typo in README
+
+## 1.4.0 2016-08-13
 
 * Merged in PR #3 to help future proof version comparisons in `service.pp`
 
