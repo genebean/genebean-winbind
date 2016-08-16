@@ -21,7 +21,10 @@ class winbind::params {
   $pam_debug                            = 'no'
   $pam_debug_state                      = 'no'
   $pam_krb5_auth                        = 'no'
+  # An string is needed here, even if it is an empty one.
+  # lint:ignore:empty_string_assignment
   $pam_krb5_ccache_type                 = ''
+  # lint:endignore
   $pam_mkhomedir                        = 'no'
   $pam_require_membership_of            = ['',]
   $pam_silent                           = 'no'
