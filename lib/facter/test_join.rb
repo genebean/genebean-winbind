@@ -1,4 +1,5 @@
 Facter.add(:test_join) do
+  ## linux case: https://linux.die.net/man/8/net
   confine :kernel => 'Linux'
   setcode do
   
@@ -7,6 +8,7 @@ Facter.add(:test_join) do
 
   end
 
+  ## windows case: https://technet.microsoft.com/en-us/library/bb490717.aspx
   confine :kernel => 'Windows'
   setcode do
 
