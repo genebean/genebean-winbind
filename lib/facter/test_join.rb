@@ -4,7 +4,7 @@ Facter.add(:test_join) do
   setcode do
   
     # check if AD is joined
-    Facter::Core::Execution.exec("system 'net',  'ads',  'testjoin'")
+    Facter::Core::Execution.exec('net ads testjoin')
 
   end
 
@@ -13,7 +13,7 @@ Facter.add(:test_join) do
   setcode do
 
     # check if AD is joined
-    Facter::Core::Execution.exec("system 'NET',  'USE',  '|', '%errorlevel%'")
+    Facter::Core::Execution.exec('NET USE | %errorlevel%')
 
   end
 end
