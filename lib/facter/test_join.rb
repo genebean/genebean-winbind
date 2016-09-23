@@ -1,5 +1,5 @@
 Facter.add(:test_join) do
-  confine :osfamily => 'RedHat'
+  confine :kernel => 'Linux'
   setcode do
   
     # check if AD is joined
