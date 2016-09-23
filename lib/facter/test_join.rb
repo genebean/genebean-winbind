@@ -4,7 +4,7 @@ Facter.add(:test_join) do
   setcode do
   
     # check if AD is joined
-    Facter::Core::Execution.exec('net ads testjoin')
+    Facter::Core::Execution.exec('type net && net ads testjoin')
 
   end
 
