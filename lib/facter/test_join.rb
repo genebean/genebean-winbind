@@ -4,7 +4,7 @@ Facter.add(:test_join) do
   setcode do
   
     # check if AD is joined
-    Facter::Core::Execution.exec('if type net && net ads testjoin; then echo "true"; else echo "false"; fi')
+    Facter::Core::Execution.exec('if type net; then if net ads testjoin; then echo "true"; else echo "false"; fi;  else echo "false"; fi')
 
   end
 
