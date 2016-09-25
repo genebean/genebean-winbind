@@ -20,7 +20,7 @@ Facter.add(:test_join) do
 
     # check if AD is joined: shell has been tested in Windows 7
     #
-    # Note: 'exit(1)' is used to exit, to prevent last 'printf "true"'
+    # Note: 'exit(1)' prevents the last 'printf "true"', if match found
     #
     Facter::Core::Execution.exec('NET USE | awk \'{if (/There are no entries in the list/) {print "false"; exit(1);}}\' && printf "true"')
 
