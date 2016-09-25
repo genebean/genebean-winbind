@@ -22,7 +22,7 @@ Facter.add(:test_join) do
     #
     # Note: the 'exit(1)' is used to exit the awk if match found
     #
-    Facter::Core::Execution.exec('NET USE | awk \'{if (/There are no entries in the list/) {print "false"; exit(1)};}\' && printf "true"')
+    Facter::Core::Execution.exec('NET USE | awk \'{if (/There are no entries in the list/) {print "false"; exit(1);}}\' && printf "true"')
 
   end
 end
