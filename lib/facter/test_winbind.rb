@@ -1,4 +1,4 @@
-Facter.add(:test_join) do
+Facter.add(:test_winbind) do
   ## linux case
   #
   #  Note: the following are additional resources:
