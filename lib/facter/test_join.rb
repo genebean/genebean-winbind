@@ -14,7 +14,11 @@ Facter.add(:test_join) do
 
   end
 
-  ## windows case: https://technet.microsoft.com/en-us/library/bb490717.aspx
+  ## windows case
+  #
+  #  Note: the following are addditional resources:
+  #
+  #        - https://technet.microsoft.com/en-us/library/bb490717.aspx
   confine :kernel => 'Windows'
   setcode do
 
