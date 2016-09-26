@@ -8,10 +8,20 @@ Facter.add(:test_winbind) do
   #
   confine :kernel => 'Linux'
   setcode do
-  
-    # query winbind: check winbind is alive
-    Facter::Core::Execution.exec('if type -p wbinfo > /dev/null 2>&1; then if wbinfo -p > /dev/null 2>&1; then echo "true"; else echo "false"; fi;  else echo "false"; fi')
+    # local variables
+    cmd_cd = `cd ~`
+    cmd_check_install = `#{cmd_cd} && type -p wbinfo > /dev/null 2>&1; echo $?`
+    cmd_ping_winbind = `wbinfo -p > /dev/null 2>&1; echo $?`
 
+    # query winbind: check winbind is alive
+    if cmd_check_install
+        if cmd_ping_winbind
+            'true'
+        else
+            'false'
+    else
+        'false'
+    end
   end
 
   ## windows case: samba doesn't run on windows
