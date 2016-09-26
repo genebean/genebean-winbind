@@ -34,7 +34,7 @@ Facter.add(:test_join) do
   setcode do
     # local variables
     pattern = 'There are no entries in the list'
-    cmd_cd = `cd ~`
+    cmd_cd = `cd .`
     cmd_check_join = `#{cmd_cd} && NET USE`
 
     # check if AD is joined
