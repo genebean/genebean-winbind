@@ -8,10 +8,21 @@ Facter.add(:test_join) do
   #
   confine :kernel => 'Linux'
   setcode do
+    # local variables
+    cmd_cd = `cd ~`
+    cmd_check_install = `#{cmd_cd} && type -p net > /dev/null 2>&1; echo $?`
+    cmd_check_join = `net ads testjoin > /dev/null 2>&1; echo $?`
   
-    # check if AD is joined: shell has been tested on unix systems
-    Facter::Core::Execution.exec('if type -p net > /dev/null 2>&1; then if net ads testjoin; then echo "true"; else echo "false"; fi;  else echo "false"; fi')
-
+    # check if AD is joined
+    if cmd_check_install
+        if cmd_check_join
+            "true"
+        else
+            "false"
+        end
+    else
+        "false"
+    end
   end
 
   ## windows case
@@ -21,12 +32,16 @@ Facter.add(:test_join) do
   #        - https://technet.microsoft.com/en-us/library/bb490717.aspx
   confine :kernel => 'Windows'
   setcode do
+    # local variables
+    pattern = 'There are no entries in the list'
+    cmd_cd = `cd ~`
+    cmd_check_join = `#{cmd_cd} && NET USE`
 
-    # check if AD is joined: shell has been tested in Windows 7
-    #
-    # Note: 'exit(1)' prevents the last 'printf "true"', if match found
-    #
-    Facter::Core::Execution.exec('NET USE | awk \'{if (/There are no entries in the list/) {print "false"; exit(1);}}\' && printf "true"')
-
+    # check if AD is joined
+    if cmd_check_join.include? pattern
+        "false"
+    else
+        "true"
+    end
   end
 end
