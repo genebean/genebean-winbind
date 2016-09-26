@@ -10,7 +10,7 @@ Facter.add(:test_join) do
     #        - https://linux.die.net/man/8/net
     #        - http://linuxcommand.org/lc3_man_pages/typeh.html
     #
-    when "Linux"
+    when 'Linux'
       # local variables
       cmd_cd = `cd ~`
       cmd_check_install = `#{cmd_cd} && type -p net > /dev/null 2>&1; echo $?`
@@ -19,19 +19,19 @@ Facter.add(:test_join) do
       # check if AD is joined
       if cmd_check_install
         if cmd_check_join
-          "true"
+          'true'
         else
-          "false"
+          'false'
         end
       else
-        "false"
+        'false'
       end
     ## windows case: tested on windows 7
     #
     #  Note: the following are addditional resources:
     #
     #        - https://technet.microsoft.com/en-us/library/bb490717.aspx
-    when "Windows"
+    when 'Windows'
       # local variables
       cmd_cd = `cd .`
       cmd_check_join = `#{cmd_cd} && NET USE`
@@ -39,13 +39,13 @@ Facter.add(:test_join) do
 
       # check if AD is joined
       if cmd_check_join.include? pattern
-        "false"
+        'false'
       else
-        "true"
+        'true'
       end
     ## else case: all other os families
     else
-      "false"
+      'false'
     end
 
   end
