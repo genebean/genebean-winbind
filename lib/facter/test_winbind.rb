@@ -18,7 +18,7 @@ Facter.add(:test_winbind) do
     when 'Windows'
       '1'
 
-    ## else case: all other os families
+    ## all other kernels
     else
       '1'
     end
