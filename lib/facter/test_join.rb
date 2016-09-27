@@ -30,9 +30,9 @@ Facter.add(:test_join) do
 
       # check AD is joined
       if cmd_check_join.include? pattern
-        '0'
-      else
         '1'
+      else
+        '0'
       end
 
     ## else case: all other os families
