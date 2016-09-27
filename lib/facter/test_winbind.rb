@@ -16,7 +16,7 @@ Facter.add(:test_winbind) do
 
     ## windows case: samba doesn't run on windows
     when 'Windows'
-      Facter::Core::Execution.exec('echo "false"')
+      '1'
 
     ## else case: all other os families
     else
