@@ -1,8 +1,8 @@
 Facter.add(:test_join) do
   setcode do
-    osfamily = Facter.value('osfamily')
+    kernel = Facter.value('kernel')
 
-    case osfamily
+    case kernel
     ## linux case
     #
     #  Note: the following are additional resources:
