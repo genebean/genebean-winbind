@@ -11,21 +11,7 @@ Facter.add(:test_winbind) do
     #        - https://www.samba.org/samba/docs/man/manpages/wbinfo.1.html
     #
     when "Linux"
-      # local variables
-      cmd_cd = `cd ~`
-      cmd_check_install = `#{cmd_cd} && type -p wbinfo > /dev/null 2>&1; echo $?`
-      cmd_ping_winbind = `wbinfo -p > /dev/null 2>&1; echo $?`
-
-      # query winbind: check winbind is alive
-      if cmd_check_install
-        if cmd_ping_winbind
-          'true'
-        else
-          'false'
-        end
-      else
-        'false'
-      end
+      Facter::Core::Execution.exec('cd /home && type wbinfo &>/dev/null; echo $?')
     ## windows case: samba doesn't run on windows
     when 'Windows'
       Facter::Core::Execution.exec('echo "false"')
