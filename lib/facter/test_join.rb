@@ -11,6 +11,7 @@ Facter.add(:test_join) do
     #        - http://linuxcommand.org/lc3_man_pages/typeh.html
     #
     when 'Linux'
+      # check AD is joined
       Facter::Core::Execution.exec('cd /home; type net &>/dev/null; net ads testjoin &>/dev/null 2>&1; echo $?')
 
     ## windows case
@@ -24,7 +25,7 @@ Facter.add(:test_join) do
       cmd_check_join = `cd /home; NET USE`
       pattern = 'There are no entries in the list'
 
-      # check if AD is joined
+      # check AD is joined
       if cmd_check_join.include? pattern
         '0'
       else
