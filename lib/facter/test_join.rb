@@ -35,7 +35,7 @@ Facter.add(:test_join) do
         '0'
       end
 
-    ## else case: all other os families
+    ## all other kernels
     else
       '1'
     end
