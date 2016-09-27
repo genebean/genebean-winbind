@@ -11,41 +11,29 @@ Facter.add(:test_join) do
     #        - http://linuxcommand.org/lc3_man_pages/typeh.html
     #
     when 'Linux'
-      # local variables
-      cmd_cd = `cd ~`
-      cmd_check_install = `#{cmd_cd} && type -p net > /dev/null 2>&1; echo $?`
-      cmd_check_join = `net ads testjoin > /dev/null 2>&1; echo $?`
+      Facter::Core::Execution.exec('cd /home; type net &>/dev/null; net ads testjoin &>/dev/null 2>&1; echo $?')
 
-      # check if AD is joined
-      if cmd_check_install
-        if cmd_check_join
-          'true'
-        else
-          'false'
-        end
-      else
-        'false'
-      end
-    ## windows case: tested on windows 7
+    ## windows case
     #
     #  Note: the following are addditional resources:
     #
     #        - https://technet.microsoft.com/en-us/library/bb490717.aspx
+    #
     when 'Windows'
       # local variables
-      cmd_cd = `cd .`
-      cmd_check_join = `#{cmd_cd} && NET USE`
+      cmd_check_join = `cd /home; NET USE`
       pattern = 'There are no entries in the list'
 
       # check if AD is joined
       if cmd_check_join.include? pattern
-        'false'
+        '0'
       else
-        'true'
+        '1'
       end
+
     ## else case: all other os families
     else
-      'false'
+      '1'
     end
 
   end
