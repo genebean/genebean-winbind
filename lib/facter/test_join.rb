@@ -16,7 +16,7 @@ Facter.add(:test_join) do
 
     ## windows case
     #
-    #  @pattern, an expected output (for windows 7), when there are no active
+    #  @pattern, an expected output (i.e. windows 7), when there are no active
     #      network connections.
     #
     #  Note: the following are addditional resources:
