@@ -217,7 +217,7 @@ Allows disabling the management of the oddjobd service. Defaults to `true`.
 
 `package_ensure`
 
-Defines the ensure setting passed to all managed packages. Defaults to `latest`.
+Defines the ensure setting passed to all managed packages. Defaults to `present`.
 
 
 ## Limitations

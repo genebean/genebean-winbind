@@ -18,7 +18,7 @@ describe 'winbind::install' do
       end
 
       # Make sure package will be installed.
-      it { should contain_package('samba3x-winbind').with_ensure('latest') }
+      it { should contain_package('samba3x-winbind').with_ensure('present') }
       it { should have_package_resource_count(1) }
     end
 
@@ -30,8 +30,8 @@ describe 'winbind::install' do
       end
 
       # Make sure package will be installed.
-      it { should contain_package('samba3x-winbind').with_ensure('latest') }
-      it { should contain_package('samba3x').with_ensure('latest') }
+      it { should contain_package('samba3x-winbind').with_ensure('present') }
+      it { should contain_package('samba3x').with_ensure('present') }
       it { should have_package_resource_count(2) }
     end
 
@@ -53,8 +53,8 @@ describe 'winbind::install' do
       end
 
       # Make sure package will be installed.
-      it { should contain_package('samba-winbind-clients').with_ensure('latest') }
-      it { should contain_package('oddjob-mkhomedir').with_ensure('latest') }
+      it { should contain_package('samba-winbind-clients').with_ensure('present') }
+      it { should contain_package('oddjob-mkhomedir').with_ensure('present') }
       it { should have_package_resource_count(2) }
     end
 
@@ -66,9 +66,9 @@ describe 'winbind::install' do
       end
 
       # Make sure package will be installed.
-      it { should contain_package('samba-winbind-clients').with_ensure('latest') }
-      it { should contain_package('oddjob-mkhomedir').with_ensure('latest') }
-      it { should contain_package('samba').with_ensure('latest') }
+      it { should contain_package('samba-winbind-clients').with_ensure('present') }
+      it { should contain_package('oddjob-mkhomedir').with_ensure('present') }
+      it { should contain_package('samba').with_ensure('present') }
       it { should have_package_resource_count(3) }
     end
 
@@ -114,7 +114,7 @@ describe 'winbind::install' do
       end
 
       # Make sure package will be installed.
-      it { should contain_package('samba-winbind').with_ensure('latest') }
+      it { should contain_package('samba-winbind').with_ensure('present') }
       it { should have_package_resource_count(1) }
     end
 
@@ -126,8 +126,8 @@ describe 'winbind::install' do
       end
 
       # Make sure package will be installed.
-      it { should contain_package('samba-winbind').with_ensure('latest') }
-      it { should contain_package('samba').with_ensure('latest') }
+      it { should contain_package('samba-winbind').with_ensure('present') }
+      it { should contain_package('samba').with_ensure('present') }
       it { should have_package_resource_count(2) }
     end
 
