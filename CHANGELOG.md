@@ -1,4 +1,13 @@
 [![GitHub tag][gh-tag-img]][gh-link]
+## 1.5.2 2017-08-01
+
+* Updated the CHANGELOG
+
+## 1.5.1 2017-08-01
+
+* Addressed issue #12 where the `winbind` service would fail to start if the
+  samba-winbind package is updated to v4.6 via Puppet before kerberos packages
+  are updated by changing `package_ensure` to `present` by default.
 
 ## 1.5.0 2016-08-16
 
