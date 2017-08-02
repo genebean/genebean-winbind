@@ -16,7 +16,7 @@ class winbind::params {
   }
   $manage_samba_service                 = true
   $oddjobd_homdir_mask                  = '0077'
-  $package_ensure                       = 'latest'
+  $package_ensure                       = 'present'
   $pam_cached_login                     = 'yes'
   $pam_debug                            = 'no'
   $pam_debug_state                      = 'no'
