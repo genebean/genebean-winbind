@@ -67,7 +67,7 @@ class winbind::service (
           enable => true,
         }
       }
-      
+
       service { 'winbind':
         ensure => 'running',
         enable => true,
