@@ -157,10 +157,10 @@ class winbind (
 
 
   # use the install -> config -> service model
-  anchor {'::winbind::start': } ->
-  class { '::winbind::install': } ->
-  class { '::winbind::config': } ->
-  class { '::winbind::service': } ->
-  anchor {'::winbind::end': }
+  anchor {'::winbind::start': }
+  -> class { '::winbind::install': }
+  -> class { '::winbind::config': }
+  -> class { '::winbind::service': }
+  -> anchor {'::winbind::end': }
 
 }
