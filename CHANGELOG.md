@@ -2,6 +2,8 @@
 
 ## 2017-08-06 - Release 1.5.3  
 - First run at using modulesync
+- Stopped testing against Puppet 3
+- Started testing against Puppet 5
 
 ## 1.5.2 2017-08-01  
 - Updated the CHANGELOG
