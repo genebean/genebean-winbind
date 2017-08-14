@@ -1,14 +1,9 @@
 # Controls the services related to winbind
-class winbind::service (
-  $enable_sharing            = $::winbind::enable_sharing,
-  $manage_messagebus_service = $::winbind::manage_messagebus_service,
-  $manage_oddjob_service     = $::winbind::manage_oddjob_service,
-  $manage_samba_service      = $::winbind::manage_samba_service,
-  ) {
+class winbind::service inherits winbind {
   case $::osfamily {
     'RedHat'  : {
       if versioncmp($::operatingsystemmajrelease, '7') < 0 {
-        if ($manage_messagebus_service == true) {
+        if ($winbind::manage_messagebus_service == true) {
           service { 'messagebus':
             ensure => 'running',
             enable => true,
@@ -16,14 +11,14 @@ class winbind::service (
           }
         }
 
-        if ($manage_oddjob_service == true) {
+        if ($winbind::manage_oddjob_service == true) {
           service { 'oddjobd':
             ensure => 'running',
             enable => true,
           }
         }
 
-        if ($enable_sharing == true and $manage_samba_service == true) {
+        if ($winbind::enable_sharing == true and $winbind::manage_samba_service == true) {
           service { 'smb':
             ensure => 'running',
             enable => true,
@@ -36,7 +31,7 @@ class winbind::service (
         }
 
       } else {
-        if ($manage_oddjob_service == true) {
+        if ($winbind::manage_oddjob_service == true) {
           service { 'oddjobd':
             ensure => 'running',
             name   => 'oddjobd.service',
@@ -44,7 +39,7 @@ class winbind::service (
           }
         }
 
-        if ($enable_sharing == true and $manage_samba_service == true) {
+        if ($winbind::enable_sharing == true and $winbind::manage_samba_service == true) {
           service { 'smb':
             ensure => 'running',
             enable => true,
@@ -61,7 +56,7 @@ class winbind::service (
     } # end RedHat
 
     'Suse' : {
-      if ($enable_sharing == true and $manage_samba_service == true) {
+      if ($winbind::enable_sharing == true and $winbind::manage_samba_service == true) {
         service { 'smb':
           ensure => 'running',
           enable => true,

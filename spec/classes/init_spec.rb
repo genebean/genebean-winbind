@@ -1,6 +1,19 @@
 require 'spec_helper'
 
 describe 'winbind' do
+  on_supported_os.each do |os, facts|
+    context "on #{os}" do
+      let(:facts) do
+        facts
+      end
+
+      # Check that all classes are present
+      it { is_expected.to compile.with_all_deps }
+      it { is_expected.to contain_class('winbind::install')}
+      it { is_expected.to contain_class('winbind::config')}
+      it { is_expected.to contain_class('winbind::service')}
+    end
+  end
 
   describe 'on Red Hat' do
     let :facts do
@@ -12,13 +25,6 @@ describe 'winbind' do
         :fqdn                      => 'SOMEHOST.ad.example.com'
       }
     end
-
-    # Check that all classes are present
-    it { should contain_class('stdlib')}
-    it { should contain_class('winbind::params')}
-    it { should contain_class('winbind::install')}
-    it { should contain_class('winbind::config')}
-    it { should contain_class('winbind::service')}
 
     context 'with domain and login restrictions set' do
       let :facts do
@@ -39,8 +45,8 @@ describe 'winbind' do
         }"
       end
 
-      it 'should pass parameters to winbind::config' do
-        should contain_class('winbind::config').with(
+      it 'should pass parameters to winbind' do
+        should contain_class('winbind').with(
           'pam_require_membership_of' => '["sysadmins", "iso-scans"]',
           'smb_realm'                 => 'AD.EXAMPLE.COM',
           'smb_workgroup'             => 'AD',
@@ -66,8 +72,8 @@ describe 'winbind' do
         }"
       end
 
-      it 'should pass parameters to winbind::install' do
-        should contain_class('winbind::install').with(
+      it 'should pass parameters to winbind:' do
+        should contain_class('winbind').with(
           'package_ensure' => 'installed',
         )
       end
@@ -92,8 +98,8 @@ describe 'winbind' do
         }"
       end
 
-      it 'should pass parameters to winbind::service' do
-        should contain_class('winbind::service').with(
+      it 'should pass parameters to winbind' do
+        should contain_class('winbind').with(
           'manage_messagebus_service' => false,
           'manage_oddjob_service'     => false,
           'manage_samba_service'      => false,
@@ -119,14 +125,14 @@ describe 'winbind' do
         }"
       end
 
-      it 'should pass parameters to winbind::install' do
-        should contain_class('winbind::install').with(
+      it 'should pass parameters to winbind' do
+        should contain_class('winbind').with(
           'enable_sharing' => true,
         )
       end
 
-      it 'should pass parameters to winbind::service' do
-        should contain_class('winbind::service').with(
+      it 'should pass parameters to winbind:' do
+        should contain_class('winbind').with(
           'enable_sharing' => true,
         )
       end
@@ -146,13 +152,6 @@ describe 'winbind' do
       }
     end
 
-    # Check that all classes are present
-    it { should contain_class('stdlib')}
-    it { should contain_class('winbind::params')}
-    it { should contain_class('winbind::install')}
-    it { should contain_class('winbind::config')}
-    it { should contain_class('winbind::service')}
-
     context 'with domain and login restrictions set' do
       let :facts do
         {
@@ -172,8 +171,8 @@ describe 'winbind' do
         }"
       end
 
-      it 'should pass parameters to winbind::config' do
-        should contain_class('winbind::config').with(
+      it 'should pass parameters to winbind' do
+        should contain_class('winbind').with(
           'pam_require_membership_of' => '["sysadmins", "iso-scans"]',
           'smb_realm'                 => 'AD.EXAMPLE.COM',
           'smb_workgroup'             => 'AD',
@@ -199,8 +198,8 @@ describe 'winbind' do
         }"
       end
 
-      it 'should pass parameters to winbind::install' do
-        should contain_class('winbind::install').with(
+      it 'should pass parameters to winbind' do
+        should contain_class('winbind').with(
           'package_ensure' => 'installed',
         )
       end
@@ -225,8 +224,8 @@ describe 'winbind' do
         }"
       end
 
-      it 'should pass parameters to winbind::service' do
-        should contain_class('winbind::service').with(
+      it 'should pass parameters to winbind' do
+        should contain_class('winbind').with(
           'manage_messagebus_service' => false,
           'manage_oddjob_service'     => false,
           'manage_samba_service'      => false,
@@ -252,14 +251,14 @@ describe 'winbind' do
         }"
       end
 
-      it 'should pass parameters to winbind::install' do
-        should contain_class('winbind::install').with(
+      it 'should pass parameters to winbind' do
+        should contain_class('winbind').with(
           'enable_sharing' => true,
         )
       end
 
-      it 'should pass parameters to winbind::service' do
-        should contain_class('winbind::service').with(
+      it 'should pass parameters to winbind' do
+        should contain_class('winbind').with(
           'enable_sharing' => true,
         )
       end
