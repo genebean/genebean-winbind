@@ -4,19 +4,15 @@ Facter.add(:test_winbind) do
 
     case kernel
     ## linux case
-    #
-    #  Note: the following are additional resources:
-    #
-    #        - http://linuxcommand.org/man_pages/wbinfo1.html
-    #        - https://www.samba.org/samba/docs/man/manpages/wbinfo.1.html
-    #
+    ##
+    ## Note: the following are additional resources:
+    ##
+    ##       - http://linuxcommand.org/man_pages/wbinfo1.html
+    ##       - https://www.samba.org/samba/docs/man/manpages/wbinfo.1.html
+    ##
     when "Linux"
       # check winbind is alive
       Facter::Core::Execution.exec('cd /home; type wbinfo &>/dev/null; wbinfo -P &>/dev/null 2>&1; echo $?')
-
-    ## windows case: samba doesn't run on windows
-    when 'Windows'
-      '1'
 
     ## all other kernels
     else
