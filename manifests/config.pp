@@ -26,13 +26,15 @@ class winbind::config inherits winbind {
   }
 
   if $::osfamily == 'RedHat' {
-    file { '/etc/oddjobd.conf.d/oddjobd-mkhomedir.conf':
-      ensure  => 'file',
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0644',
-      content => template('winbind/oddjobd-mkhomedir.conf.erb'),
-      notify  => Service['winbind'],
+    if ($winbind::manage_oddjob_service == true) {
+      file { '/etc/oddjobd.conf.d/oddjobd-mkhomedir.conf':
+        ensure  => 'file',
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0644',
+        content => template('winbind/oddjobd-mkhomedir.conf.erb'),
+        notify  => Service[['oddjobd', 'winbind']],
+      }
     }
   }
 
