@@ -3,8 +3,8 @@
 # This class setups up a config file to be included into smb.conf
 #
 define winbind::share (
-  $ensure_setting                = lookup('winbind::share::ensure_setting'),
-  Hash $settings_hash            = lookup('winbind::settings_hash'),
+  Boolean       $ensure_setting  = lookup('winbind::share::ensure_setting'),
+  Hash          $settings_hash   = lookup('winbind::settings_hash'),
   Array[String] $smb_include_dir = lookup('winbind::smb_includes_dir'),
 ) {
 
