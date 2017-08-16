@@ -1,0 +1,6 @@
+---
+winbind::pam_require_membership_of :
+  - 'sysadmins'
+  - 'iso-scans'
+winbind::smb_realm                 : 'AD.EXAMPLE.COM'
+winbind::smb_workgroup             : 'AD'
