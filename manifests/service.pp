@@ -13,8 +13,9 @@ class winbind::service inherits winbind {
 
         if ($winbind::manage_oddjob_service == true) {
           service { 'oddjobd':
-            ensure => 'running',
-            enable => true,
+            ensure    => 'running',
+            enable    => true,
+            subscribe => File['/etc/oddjobd.conf.d/oddjobd-mkhomedir.conf'],
           }
         }
 
@@ -33,9 +34,10 @@ class winbind::service inherits winbind {
       } else {
         if ($winbind::manage_oddjob_service == true) {
           service { 'oddjobd':
-            ensure => 'running',
-            name   => 'oddjobd.service',
-            enable => true,
+            ensure    => 'running',
+            name      => 'oddjobd.service',
+            enable    => true,
+            subscribe => File['/etc/oddjobd.conf.d/oddjobd-mkhomedir.conf'],
           }
         }
 
