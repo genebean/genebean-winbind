@@ -24,6 +24,7 @@ class winbind::config (
   $krb5_kdc                             = $::winbind::krb5_kdc,
   $krb5_renew_lifetime                  = $::winbind::krb5_renew_lifetime,
   $krb5_ticket_lifetime                 = $::winbind::krb5_ticket_lifetime,
+  $manage_joindomain_script             = $::winbind::manage_joindomain_script,
   $manage_oddjob_service                = $::winbind::manage_oddjob_service,
   $oddjobd_homdir_mask                  = $::winbind::oddjobd_homdir_mask,
   $pam_cached_login                     = $::winbind::pam_cached_login,
@@ -64,6 +65,20 @@ class winbind::config (
   $smb_workgroup                        = $::winbind::smb_workgroup,
   # lint:endignore
   ) {
+  if $manage_joindomain_script {
+    $joindomain = $::osfamily ? {
+      'RedHat' => 'joindomainForRedHat.sh',
+      'Suse'   => 'joinDomainForSUSE.sh',
+      default  => 'joindomainForRedHat.sh',
+    }
+
+    file { '/root/joinDomain.sh':
+      ensure => present,
+      mode   => '0755',
+      source => "puppet:///modules/winbind/${joindomain}",
+    }
+  }
+
   file { '/etc/krb5.conf':
     ensure  => 'file',
     owner   => 'root',

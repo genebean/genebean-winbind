@@ -9,6 +9,7 @@ class winbind::params {
   $krb5_kdc                             = 'FILE:/var/log/krb5kdc.log'
   $krb5_renew_lifetime                  = '7d'
   $krb5_ticket_lifetime                 = '24h'
+  $manage_joindomain_script             = true
   $manage_messagebus_service            = true
   $manage_oddjob_service                = $::osfamily ? {
     'Suse'  => false,

@@ -1,0 +1,14 @@
+{
+  "supports_noop": false,
+  "description": "Run /root/joinDomain.sh",
+  "parameters": {
+    "domainuser": {
+      "description": "The username of a domain user who can join a machine to the domain",
+      "type": "String[1]"
+    },
+    "domainpassword": {
+      "description": "The password for the user defined in the username parameter",
+      "type": "String[1]"
+    }
+  }
+}

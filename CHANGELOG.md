@@ -1,5 +1,12 @@
 [![GitHub tag][gh-tag-img]][gh-link]
 
+## 2017-10-10 - Release 1.6.0  
+- Added task and plan for joining a domain using Bolt
+- Added example files in the `examples` folder
+- Reworked the README a bit
+- Added two facts contributed by Jeff Levesque
+- Updated again with modulesync
+
 ## 2017-08-06 - Release 1.5.3  
 - First run at using modulesync
 - Stopped testing against Puppet 3
