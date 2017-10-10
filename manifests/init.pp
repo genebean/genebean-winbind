@@ -21,6 +21,7 @@ class winbind (
   $krb5_kdc                             = $::winbind::params::krb5_kdc,
   $krb5_renew_lifetime                  = $::winbind::params::krb5_renew_lifetime,
   $krb5_ticket_lifetime                 = $::winbind::params::krb5_ticket_lifetime,
+  $manage_joindomain_script             = $::winbind::params::manage_joindomain_script,
   $manage_messagebus_service            = $::winbind::params::manage_messagebus_service,
   $manage_oddjob_service                = $::winbind::params::manage_oddjob_service,
   $manage_samba_service                 = $::winbind::params::manage_samba_service,
