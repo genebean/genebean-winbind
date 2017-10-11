@@ -5,7 +5,7 @@
 
 if [ "$#" -eq 0 ] && [ -n "$PT_username" ] && [ -n "$PT_password" ]; then
     username="${PT_username}%${PT_password}"
-elif [ "$#" eq 1 ]; then
+elif [ "$#" -eq 1 ]; then
     username=$1
 else
     echo "Usage: $0 username"
