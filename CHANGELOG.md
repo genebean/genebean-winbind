@@ -1,5 +1,8 @@
 [![GitHub tag][gh-tag-img]][gh-link]
 
+## 2017-10-11 - Release 1.6.1  
+- Fixed syntax error in the join domain scripts
+
 ## 2017-10-10 - Release 1.6.0  
 - Added task and plan for joining a domain using Bolt
 - Added example files in the `examples` folder
