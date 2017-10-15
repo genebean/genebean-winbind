@@ -20,6 +20,7 @@ class winbind (
   String               $krb5_kdc,
   String               $krb5_renew_lifetime,
   String               $krb5_ticket_lifetime,
+  Boolean              $manage_joindomain_script,
   Boolean              $manage_messagebus_service,
   Boolean              $manage_oddjob_service,
   Boolean              $manage_samba_service,

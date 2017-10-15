@@ -16,12 +16,26 @@
 #  }
 class winbind::config inherits winbind {
 
+  if $winbind::manage_joindomain_script {
+    $joindomain = $::osfamily ? {
+      'RedHat' => 'joindomainForRedHat.sh',
+      'Suse'   => 'joinDomainForSUSE.sh',
+      default  => 'joindomainForRedHat.sh',
+    }
+
+    file { '/root/joinDomain.sh':
+      ensure => present,
+      mode   => '0755',
+      source => "puppet:///modules/winbind/${joindomain}",
+    }
+  }
+
   file { '/etc/krb5.conf':
     ensure  => 'file',
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => template('winbind/krb5.conf.erb'),
+    content => epp('winbind/krb5.conf.epp'),
     notify  => Service['winbind'],
   }
 
@@ -31,7 +45,7 @@ class winbind::config inherits winbind {
       owner   => 'root',
       group   => 'root',
       mode    => '0644',
-      content => template('winbind/oddjobd-mkhomedir.conf.erb'),
+      content => epp('winbind/oddjobd-mkhomedir.conf.epp'),
       notify  => Service['winbind'],
     }
   }
@@ -41,7 +55,7 @@ class winbind::config inherits winbind {
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => template('winbind/smb.conf.erb'),
+    content => epp('winbind/smb.conf.epp'),
     notify  => Service['winbind'],
   }
 
@@ -58,7 +72,7 @@ class winbind::config inherits winbind {
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => template('winbind/pam_winbind.conf.erb'),
+    content => epp('winbind/pam_winbind.conf.epp'),
     notify  => Service['winbind'],
   }
 

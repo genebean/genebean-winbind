@@ -1,0 +1,38 @@
+###################################
+#
+# This file is managed by Puppet
+#
+###################################
+
+[global]
+  workgroup                      = <%= $winbind::smb_workgroup.upcase %>
+  realm                          = <%= $winbind::smb_realm.upcase %>
+  encrypt passwords              = <%= $winbind::smb_encrypt_passwords %>
+  log level                      = <%= $winbind::smb_log_level %>
+  syslog                         = <%= $winbind::smb_syslog %>
+;  server string                 = <%= $winbind::smb_server_string %>
+  security                       = <%= $winbind::smb_security %>
+  log file                       = <%= $winbind::smb_log_file %>
+  max log size                   = <%= $winbind::smb_max_log_size %>
+  printcap name                  = <%= $winbind::smb_printcap_name %>
+  printing                       = <%= $winbind::smb_printing %>
+  winbind enum users             = <%= $winbind::smb_winbind_enum_users %>
+  winbind enum groups            = <%= $winbind::smb_winbind_enum_groups %>
+  winbind use default domain     = <%= $winbind::smb_winbind_use_default_domain %>
+  winbind nss info               = <%= $winbind::smb_winbind_nss_info %>
+  winbind normalize names        = <%= $winbind::smb_winbind_normalize_names %>
+  winbind offline logon          = <%= $winbind::smb_winbind_offline_logon %>
+  winbind separator              = <%= $winbind::smb_winbind_separator %>
+  template homedir               = <%= $winbind::smb_template_homedir %>
+  template shell                 = <%= $winbind::smb_template_shell %>
+  idmap config *:backend         = <%= $winbind::smb_idmap_config_default_backend %>
+  idmap config *:range           = <%= $winbind::smb_idmap_config_default_range_start %>-<%= $winbind::smb_idmap_config_default_range_end %>
+  idmap config *:rangesize       = <%= $winbind::smb_idmap_config_default_rangesize %>
+
+  # settings provided as a hash to Puppet
+  include                        = <%= $winbind::smb_includes_dir %>/smb-extras.conf
+
+  # user defined include files
+<% $winbind::smb_includes_files.each |$include_file| { -%>
+  include                        = <%= $winbind::smb_includes_dir %>/<%= $include_file %>.conf
+<% } -%>

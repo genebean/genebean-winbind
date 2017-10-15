@@ -1,0 +1,6 @@
+<%- | Hash $settings_hash, 
+      $title | -%>
+[<%= $title %>]
+  <% $settings_hash.each |$key,$value| { -%>
+  <%= $key %> = <%= $value %>
+  <% } -%>

@@ -8,6 +8,7 @@ winbind::krb5_forwardable: true
 winbind::krb5_kdc: 'FILE:/var/log/krb5kdc.log'
 winbind::krb5_renew_lifetime: '7d'
 winbind::krb5_ticket_lifetime: '24h'
+winbind::manage_joindomain_script: true
 winbind::manage_messagebus_service: true
 winbind::manage_oddjob_service: true
 winbind::manage_samba_service: true

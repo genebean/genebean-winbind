@@ -13,7 +13,10 @@ define winbind::share (
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => template('winbind/share.erb'),
+    content => epp('winbind/share.epp', {
+      'settings_hash' => $settings_hash,
+      'title'         => $title
+    }),
     require => File[$smb_include_dir],
     notify  => Service['smb'],
   }
