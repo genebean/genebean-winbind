@@ -1,8 +1,8 @@
 # Installs packages required to utilize winbind for joining Active Directory
 class winbind::install inherits winbind {
-  case $::osfamily {
+  case $facts['os']['family'] {
     'RedHat' : {
-      case $::operatingsystemmajrelease {
+      case $facts['os']['release']['major'] {
         '5'     : {
           package { 'samba3x-winbind':
             ensure => $winbind::package_ensure,
@@ -45,7 +45,7 @@ class winbind::install inherits winbind {
     } # end Suse
 
     default : {
-      fail("The ${::osfamily} OS family is not supported by this module yet.")
+      fail("The ${facts['os']['family']} OS family is not supported by this module yet.")
     }
   } # end osfamily
 

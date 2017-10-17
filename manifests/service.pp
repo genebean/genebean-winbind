@@ -1,8 +1,8 @@
 # Controls the services related to winbind
 class winbind::service inherits winbind {
-  case $::osfamily {
+  case $facts['os']['family'] {
     'RedHat'  : {
-      if versioncmp($::operatingsystemmajrelease, '7') < 0 {
+      if versioncmp($facts['os']['release']['major'], '7') < 0 {
         if ($winbind::manage_messagebus_service == true) {
           service { 'messagebus':
             ensure => 'running',
@@ -72,7 +72,7 @@ class winbind::service inherits winbind {
     } # end Suse
 
     default : {
-      fail("The ${::osfamily} OS family is not supported by this module yet.")
+      fail("The ${facts['os']['family']} OS family is not supported by this module yet.")
     }
 
   } # end case

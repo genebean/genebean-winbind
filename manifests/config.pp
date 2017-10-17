@@ -17,14 +17,14 @@
 class winbind::config inherits winbind {
 
   if $winbind::manage_joindomain_script {
-    $joindomain = $::osfamily ? {
+    $joindomain = $facts['os']['family'] ? {
       'RedHat' => 'joindomainForRedHat.sh',
       'Suse'   => 'joinDomainForSUSE.sh',
       default  => 'joindomainForRedHat.sh',
     }
 
     file { '/root/joinDomain.sh':
-      ensure => present,
+      ensure => 'file',
       mode   => '0755',
       source => "puppet:///modules/winbind/${joindomain}",
     }
@@ -39,7 +39,7 @@ class winbind::config inherits winbind {
     notify  => Service['winbind'],
   }
 
-  if $::osfamily == 'RedHat' {
+  if $facts['os']['family'] == 'RedHat' {
     file { '/etc/oddjobd.conf.d/oddjobd-mkhomedir.conf':
       ensure  => 'file',
       owner   => 'root',
