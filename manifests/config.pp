@@ -18,7 +18,7 @@ class winbind::config inherits winbind {
 
   if $winbind::manage_joindomain_script {
     $joindomain = $facts['os']['family'] ? {
-      'RedHat' => 'joindomainForRedHat.sh',
+      'RedHat' => 'joinDomainForRedHat.sh',
       'Suse'   => 'joinDomainForSUSE.sh',
       default  => 'joindomainForRedHat.sh',
     }
