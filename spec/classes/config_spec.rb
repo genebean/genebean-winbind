@@ -9,6 +9,31 @@ describe 'winbind::config' do
 
       let(:node) { 'SOMEHOST.ad.example.com' }
 
+      context 'with defaults' do
+        let :pre_condition do
+          "class {'winbind': }"
+        end
+
+        it 'should manage /root/joinDomain.sh' do
+          should contain_file('/root/joinDomain.sh')
+        end
+
+        it 'should make /root/joinDomain.sh executable' do
+          should contain_file('/root/joinDomain.sh').with_mode('0755')
+        end
+
+        case facts[:osfamily]
+        when 'RedHat'
+          it 'should use joinDomainForRedHat.sh as source for /root/joinDomain.sh' do
+            should contain_file('/root/joinDomain.sh').with_source('puppet:///modules/winbind/joinDomainForRedHat.sh')
+          end
+        when 'Suse'
+          it 'should use joinDomainForSUSE.sh as source for /root/joinDomain.sh' do
+            should contain_file('/root/joinDomain.sh').with_source('puppet:///modules/winbind/joinDomainForSUSE.sh')
+          end
+        end # ends case facts[:osfamily]
+      end # ends context 'with defaults'
+
       context 'with domain and login restrictions' do
         let :pre_condition do
           "class {'winbind':
