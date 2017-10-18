@@ -3,11 +3,17 @@ class winbind::service inherits winbind {
   case $facts['os']['family'] {
     'RedHat'  : {
       if versioncmp($facts['os']['release']['major'], '7') < 0 {
-        if ($winbind::manage_messagebus_service == true) {
+        if ($winbind::manage_messagebus_service == true and
+            $winbind::manage_oddjob_service == true) {
           service { 'messagebus':
             ensure => 'running',
             enable => true,
             before => Service['oddjobd'],
+          }
+        } elsif ($winbind::manage_messagebus_service == true) {
+          service { 'messagebus':
+            ensure => 'running',
+            enable => true,
           }
         }
 
@@ -19,7 +25,8 @@ class winbind::service inherits winbind {
           }
         }
 
-        if ($winbind::enable_sharing == true and $winbind::manage_samba_service == true) {
+        if ($winbind::enable_sharing == true and
+            $winbind::manage_samba_service == true) {
           service { 'smb':
             ensure => 'running',
             enable => true,
@@ -41,7 +48,8 @@ class winbind::service inherits winbind {
           }
         }
 
-        if ($winbind::enable_sharing == true and $winbind::manage_samba_service == true) {
+        if ($winbind::enable_sharing == true and
+            $winbind::manage_samba_service == true) {
           service { 'smb':
             ensure => 'running',
             enable => true,
@@ -58,7 +66,8 @@ class winbind::service inherits winbind {
     } # end RedHat
 
     'Suse' : {
-      if ($winbind::enable_sharing == true and $winbind::manage_samba_service == true) {
+      if ($winbind::enable_sharing == true and
+          $winbind::manage_samba_service == true) {
         service { 'smb':
           ensure => 'running',
           enable => true,
