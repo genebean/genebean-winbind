@@ -12,9 +12,9 @@ describe 'winbind::service' do
           "class {'winbind': }"
         end
 
-        case facts[:osfamily]
+        case facts[:os]['family']
         when 'RedHat'
-          case facts[:operatingsystemmajrelease]
+          case facts[:os]['release']['major']
           when '7'
             it { should contain_service('oddjobd').with_ensure('running') }
             it { should contain_service('winbind').with_ensure('running') }
@@ -40,9 +40,9 @@ describe 'winbind::service' do
           }"
         end
 
-        case facts[:osfamily]
+        case facts[:os]['family']
         when 'RedHat'
-          case facts[:operatingsystemmajrelease]
+          case facts[:os]['release']['major']
           when '7'
             it { should contain_service('winbind').with_ensure('running') }
             it { should have_service_resource_count(1) }
@@ -61,9 +61,9 @@ describe 'winbind::service' do
           }"
         end
 
-        case facts[:osfamily]
+        case facts[:os]['family']
         when 'RedHat'
-          case facts[:operatingsystemmajrelease]
+          case facts[:os]['release']['major']
           when '7'
             it { should contain_service('oddjobd').with_ensure('running') }
             it { should contain_service('winbind').with_ensure('running') }

@@ -12,9 +12,9 @@ describe 'winbind::install' do
           "class {'winbind': }"
         end
 
-        case facts[:osfamily]
+        case facts[:os]['family']
         when 'RedHat'
-          case facts[:operatingsystemmajrelease]
+          case facts[:os]['release']['major']
           when '5'
             it { should contain_package('samba3x-winbind').with_ensure('present') }
             it { should have_package_resource_count(1) }
@@ -38,9 +38,9 @@ describe 'winbind::install' do
           }"
         end
 
-        case facts[:osfamily]
+        case facts[:os]['family']
         when 'RedHat'
-          case facts[:operatingsystemmajrelease]
+          case facts[:os]['release']['major']
           when '5'
             it { should contain_package('samba3x-winbind').with_ensure('installed') }
             it { should have_package_resource_count(1) }
@@ -64,9 +64,9 @@ describe 'winbind::install' do
           }"
         end
 
-        case facts[:osfamily]
+        case facts[:os]['family']
         when 'RedHat'
-          case facts[:operatingsystemmajrelease]
+          case facts[:os]['release']['major']
           when '5'
             it { should contain_package('samba3x-winbind').with_ensure('present') }
             it { should contain_package('samba3x').with_ensure('present') }

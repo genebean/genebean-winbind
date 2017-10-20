@@ -22,7 +22,7 @@ describe 'winbind::config' do
           should contain_file('/root/joinDomain.sh').with_mode('0755')
         end
 
-        case facts[:osfamily]
+        case facts[:os]['family']
         when 'RedHat'
           it 'should use joinDomainForRedHat.sh as source for /root/joinDomain.sh' do
             should contain_file('/root/joinDomain.sh').with_source('puppet:///modules/winbind/joinDomainForRedHat.sh')
@@ -61,7 +61,7 @@ describe 'winbind::config' do
           should contain_file('/etc/samba/smb.conf').with_content(/workgroup\s+ = AD/)
         end
 
-        case facts[:osfamily]
+        case facts[:os]['family']
         when 'RedHat'
           it 'should manage oddjobd-mkhomedir.conf' do
             should contain_file('/etc/oddjobd.conf.d/oddjobd-mkhomedir.conf').with_content(/This file is managed by Puppet/)
