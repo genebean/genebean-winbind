@@ -1,29 +1,32 @@
 # Controls the services related to winbind
-class winbind::service (
-  $enable_sharing            = $::winbind::enable_sharing,
-  $manage_messagebus_service = $::winbind::manage_messagebus_service,
-  $manage_oddjob_service     = $::winbind::manage_oddjob_service,
-  $manage_samba_service      = $::winbind::manage_samba_service,
-  ) {
-  case $::osfamily {
+class winbind::service inherits winbind {
+  case $facts['os']['family'] {
     'RedHat'  : {
-      if versioncmp($::operatingsystemmajrelease, '7') < 0 {
-        if ($manage_messagebus_service == true) {
+      if versioncmp($facts['os']['release']['major'], '7') < 0 {
+        if ($winbind::manage_messagebus_service == true and
+            $winbind::manage_oddjob_service == true) {
           service { 'messagebus':
             ensure => 'running',
             enable => true,
             before => Service['oddjobd'],
           }
-        }
-
-        if ($manage_oddjob_service == true) {
-          service { 'oddjobd':
+        } elsif ($winbind::manage_messagebus_service == true) {
+          service { 'messagebus':
             ensure => 'running',
             enable => true,
           }
         }
 
-        if ($enable_sharing == true and $manage_samba_service == true) {
+        if ($winbind::manage_oddjob_service == true) {
+          service { 'oddjobd':
+            ensure    => 'running',
+            enable    => true,
+            subscribe => File['/etc/oddjobd.conf.d/oddjobd-mkhomedir.conf'],
+          }
+        }
+
+        if ($winbind::enable_sharing == true and
+            $winbind::manage_samba_service == true) {
           service { 'smb':
             ensure => 'running',
             enable => true,
@@ -36,15 +39,17 @@ class winbind::service (
         }
 
       } else {
-        if ($manage_oddjob_service == true) {
+        if ($winbind::manage_oddjob_service == true) {
           service { 'oddjobd':
-            ensure => 'running',
-            name   => 'oddjobd.service',
-            enable => true,
+            ensure    => 'running',
+            name      => 'oddjobd.service',
+            enable    => true,
+            subscribe => File['/etc/oddjobd.conf.d/oddjobd-mkhomedir.conf'],
           }
         }
 
-        if ($enable_sharing == true and $manage_samba_service == true) {
+        if ($winbind::enable_sharing == true and
+            $winbind::manage_samba_service == true) {
           service { 'smb':
             ensure => 'running',
             enable => true,
@@ -61,7 +66,8 @@ class winbind::service (
     } # end RedHat
 
     'Suse' : {
-      if ($enable_sharing == true and $manage_samba_service == true) {
+      if ($winbind::enable_sharing == true and
+          $winbind::manage_samba_service == true) {
         service { 'smb':
           ensure => 'running',
           enable => true,
@@ -75,7 +81,7 @@ class winbind::service (
     } # end Suse
 
     default : {
-      fail("The ${::osfamily} OS family is not supported by this module yet.")
+      fail("The ${facts['os']['family']} OS family is not supported by this module yet.")
     }
 
   } # end case
