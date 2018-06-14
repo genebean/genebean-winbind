@@ -19,6 +19,10 @@
 
 [realms]
 <%= @smb_realm.upcase %> = {
+ admin_server = <%= @krb5_realms_admin_server %>
+ <%- Array(@krb5_realms_kdc).each do |server| -%>
+ kdc = <%= server %>
+ <%- end -%>
  }
 
 [domain_realm]
