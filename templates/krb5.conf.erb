@@ -1,30 +1,31 @@
-###################################
+#######################################################################
 #
-# This file is managed by Puppet
+# This file is managed by the samba puppet module.
+# *** DO NOT EDIT LOCALLY, CHANGE PARAMETERS ON THE PUPPET MASTER ***
 #
-###################################
+#######################################################################
 
 [logging]
- default = <%= @krb5_default %>
- kdc = <%= @krb5_kdc %>
- admin_server = <%= @krb5_admin_server %>
+ admin_server     = <%= @krb5_logging_admin_server %>
+ default          = <%= @krb5_logging_default %>
+ kdc              = <%= @krb5_logging_kdc %>
 
 [libdefaults]
- default_realm = <%= @smb_realm.upcase %>
- dns_lookup_realm = <%= @krb5_dns_lookup_realm %>
- dns_lookup_kdc = <%= @krb5_dns_lookup_kdc %>
- ticket_lifetime = <%= @krb5_ticket_lifetime %>
- renew_lifetime = <%= @krb5_renew_lifetime %>
- forwardable = <%= @krb5_forwardable %>
+ default_realm    = <%= @krb5_libdefaults_default_realm.upcase %>
+ dns_lookup_kdc   = <%= @krb5_libdefaults_dns_lookup_kdc %>
+ dns_lookup_realm = <%= @krb5_libdefaults_dns_lookup_realm %>
+ forwardable      = <%= @krb5_libdefaults_forwardable %>
+ renew_lifetime   = <%= @krb5_libdefaults_renew_lifetime %>
+ ticket_lifetime  = <%= @krb5_libdefaults_ticket_lifetime %>
 
 [realms]
 <%= @smb_realm.upcase %> = {
- admin_server = <%= @krb5_realms_admin_server %>
+ admin_server     = <%= @krb5_realms_admin_server %>
  <%- Array(@krb5_realms_kdc).each do |server| -%>
- kdc = <%= server %>
+ kdc              = <%= server %>
  <%- end -%>
  }
 
 [domain_realm]
- .<%= @smb_realm.downcase %> = <%= @smb_realm.upcase %>
- <%= @smb_realm.downcase %> = <%= @smb_realm.upcase %>
+ .<%= @smb_realm.downcase %>          = <%= @smb_realm.upcase %>
+ <%= @smb_realm.downcase %>           = <%= @smb_realm.upcase %>

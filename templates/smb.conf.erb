@@ -1,38 +1,37 @@
-###################################
+#######################################################################
 #
-# This file is managed by Puppet
+# This file is managed by the samba puppet module.
+# *** DO NOT EDIT LOCALLY, CHANGE PARAMETERS ON THE PUPPET MASTER ***
 #
-###################################
+#######################################################################
 
 [global]
-  workgroup                      = <%= @smb_workgroup.upcase %>
-  realm                          = <%= @smb_realm.upcase %>
-  encrypt passwords              = <%= @smb_encrypt_passwords %>
-  log level                      = <%= @smb_log_level %>
-  syslog                         = <%= @smb_syslog %>
-  server string                 = <%= @smb_server_string %>
-  security                       = <%= @smb_security %>
-  log file                       = <%= @smb_log_file %>
-  max log size                   = <%= @smb_max_log_size %>
-  printcap name                  = <%= @smb_printcap_name %>
-  printing                       = <%= @smb_printing %>
-  winbind enum users             = <%= @smb_winbind_enum_users %>
-  winbind enum groups            = <%= @smb_winbind_enum_groups %>
-  winbind use default domain     = <%= @smb_winbind_use_default_domain %>
-  winbind nss info               = <%= @smb_winbind_nss_info %>
-  winbind normalize names        = <%= @smb_winbind_normalize_names %>
-  winbind offline logon          = <%= @smb_winbind_offline_logon %>
-  winbind separator              = <%= @smb_winbind_separator %>
-  template homedir               = <%= @smb_template_homedir %>
-  template shell                 = <%= @smb_template_shell %>
-  idmap config *:backend         = <%= @smb_idmap_config_default_backend %>
-  idmap config *:range           = <%= @smb_idmap_config_default_range_start %>-<%= @smb_idmap_config_default_range_end %>
-  idmap config *:rangesize       = <%= @smb_idmap_config_default_rangesize %>
-
-  # settings provided as a hash to Puppet
-  include                        = <%= @smb_include_dir %>/smb-extras.conf
-
-  # user defined include files
-<% @smb_includes_files.each do |include_file| -%>
-  include                        = <%= @smb_include_dir %>/<%= include_file %>.conf
-<% end %>
+  client use spnego           = <%= @smb_client_use_spnego %>
+  cups options                = <%= @smb_cups_options %>
+  disable spoolss             = <%= @smb_disable_spoolss %>
+  encrypt passwords           = <%= @smb_encrypt_passwords %>
+  idmap config DE:backend     = <%= @smb_idmap_config_backend %>
+  idmap config DE:base_rid    = <%= @smb_idmap_config_base_rid %>
+  idmap config DE:range       = <%= @smb_idmap_config_range %>
+  idmap config DE:rangesize   = <%= @smb_idmap_config_rangesize %>
+  kerberos method             = <%= @smb_kerberos_method %>
+  load printers               = <%= @smb_load_printers %>
+  log file                    = <%= @smb_log_file %>
+  max log size                = <%= @smb_max_log_size %>
+  passdb backend              = <%= @smb_passdb_backend %>
+  password server             = <%= @smb_password_server %>
+  printcap name               = <%= @smb_printcap_name %>
+  printing                    = <%= @smb_printing %>
+  realm                       = <%= @smb_realm %>
+  security                    = <%= @smb_security %>
+  server string               = <%= @smb_server_string %>
+  show add printer wizard     = <%= @smb_show_add_printer_wizard %>
+  template homedir            = <%= @smb_template_homedir %>
+  template shell              = <%= @smb_template_shell %>
+  winbind cache time          = <%= @smb_winbind_cache_time %>
+  winbind enum groups         = <%= @smb_winbind_enum_groups %>
+  winbind enum users          = <%= @smb_winbind_enum_users %>
+  winbind offline logon       = <%= @smb_winbind_offline_logon %>
+  winbind separator           = <%= @smb_winbind_separator %>
+  winbind use default domain  = <%= @smb_winbind_use_default_domain %>
+  workgroup                   = <%= @smb_workgroup %>
