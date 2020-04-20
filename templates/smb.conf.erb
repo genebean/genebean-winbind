@@ -22,7 +22,9 @@
   winbind nss info               = <%= @smb_winbind_nss_info %>
   winbind normalize names        = <%= @smb_winbind_normalize_names %>
   winbind offline logon          = <%= @smb_winbind_offline_logon %>
+  <%- if @smb_winbind_separator -%>
   winbind separator              = <%= @smb_winbind_separator %>
+  <%- end -%>
   template homedir               = <%= @smb_template_homedir %>
   template shell                 = <%= @smb_template_shell %>
   idmap config *:backend         = <%= @smb_idmap_config_default_backend %>
