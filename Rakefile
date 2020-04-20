@@ -6,11 +6,24 @@ require 'puppet-lint/tasks/puppet-lint'
 require 'puppet-syntax/tasks/puppet-syntax'
 require 'yamllint/rake_task'
 
-exclude_paths = [
-  "pkg/**/*",
-  "vendor/**/*",
-  "spec/**/*",
-]
+puppetversion = ENV.key?('PUPPET_VERSION') ? ENV['PUPPET_VERSION'] : ['~> 5.0']
+
+if puppetversion =~ / 4\./
+  exclude_paths = [
+    "pkg/**/*",
+    "plans/**/*",
+    "vendor/**/*",
+    "spec/**/*",
+  ]
+else
+  exclude_paths = [
+    "pkg/**/*",
+    "vendor/**/*",
+    "spec/**/*",
+  ]
+end
+
+
 
 PuppetLint::RakeTask.new :lint do |config|
   config.fail_on_warnings = true

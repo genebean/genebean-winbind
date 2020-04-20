@@ -46,6 +46,50 @@ describe 'winbind::config' do
 
   end
 
+  describe 'with winbind separator removed on RedHat' do
+    let :facts do
+      {
+        :kernel                    => 'Linux',
+        :osfamily                  => 'RedHat',
+        :operatingsystem           => 'RedHat',
+        :operatingsystemmajrelease => '7',
+        :fqdn                      => 'SOMEHOST.ad.example.com'
+      }
+    end
+
+    let :pre_condition do
+      "class {'winbind':
+        smb_winbind_separator => '',
+      }"
+    end
+
+    it 'should include share2.conf in smb.conf' do
+      should contain_file('/etc/samba/smb.conf').without_content(/winbind\sseparator\s+ = \+/)
+    end
+
+  end
+
+  describe 'with default winbind separator on RedHat' do
+    let :facts do
+      {
+        :kernel                    => 'Linux',
+        :osfamily                  => 'RedHat',
+        :operatingsystem           => 'RedHat',
+        :operatingsystemmajrelease => '7',
+        :fqdn                      => 'SOMEHOST.ad.example.com'
+      }
+    end
+
+    let :pre_condition do
+      "include winbind"
+    end
+
+    it 'should include default winbind separator in smb.conf' do
+      should contain_file('/etc/samba/smb.conf').with_content(/winbind\sseparator\s+ = \+/)
+    end
+
+  end
+
   describe 'with sharing enabled on RedHat' do
     let :facts do
       {
