@@ -70,6 +70,28 @@ describe 'winbind::config' do
         end
       end
 
+      context 'with winbind separator removed' do
+        let :pre_condition do
+          "class {'winbind':
+            smb_winbind_separator => '',
+          }"
+        end
+    
+        it 'does not include winbind separator smb.conf' do
+          is_expected.to contain_file('/etc/samba/smb.conf').without_content(/winbind\sseparator\s+ = \+/)
+        end
+      end
+    
+      context 'with default winbind separator' do
+        let :pre_condition do
+          "include winbind"
+        end
+    
+        it 'includes default winbind separator in smb.conf' do
+          is_expected.to contain_file('/etc/samba/smb.conf').with_content(/winbind\sseparator\s+ = \+/)
+        end
+      end
+
       context 'with sharing enabled' do
         let :pre_condition do
           "class {'winbind':
