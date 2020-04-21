@@ -45,6 +45,7 @@ branches:
   only:
     - master
     - /^v\d/
+    - release
     - /^\d+\.\d+.\d+/
 notifications:
   email: false

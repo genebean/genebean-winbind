@@ -4,6 +4,7 @@
 .travis.yml:
   branches:
     - master
+    - release
     - /^\d+\.\d+.\d+/
   deploy_to_forge:
     tag_regex: "^\\d+\\.\\d+.\\d+"
