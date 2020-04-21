@@ -1,5 +1,9 @@
 [![GitHub tag][gh-tag-img]][gh-link]
 
+## 2020-04-20 - Release 1.6.3  
+- Fixed bug introduced by new version of winbind on RHEL 7.8
+- Limited testing to Puppet 5
+
 ## 2017-10-11 - Release 1.6.1  
 - Fixed syntax error in the join domain scripts
 

@@ -8,20 +8,11 @@ require 'yamllint/rake_task'
 
 puppetversion = ENV.key?('PUPPET_VERSION') ? ENV['PUPPET_VERSION'] : ['~> 5.0']
 
-if puppetversion =~ / 4\./
-  exclude_paths = [
-    "pkg/**/*",
-    "plans/**/*",
-    "vendor/**/*",
-    "spec/**/*",
-  ]
-else
-  exclude_paths = [
-    "pkg/**/*",
-    "vendor/**/*",
-    "spec/**/*",
-  ]
-end
+exclude_paths = [
+  "pkg/**/*",
+  "vendor/**/*",
+  "spec/**/*",
+]
 
 
 

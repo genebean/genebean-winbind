@@ -4,9 +4,7 @@ source ENV['GEM_SOURCE'] || 'https://rubygems.org'
 puppetversion = ENV.key?('PUPPET_VERSION') ? ENV['PUPPET_VERSION'] : ['~> 5.0']
 
 group :development, :unit_tests do
-  if puppetversion =~ / 4\./
-    gem 'rgen',                  '~> 0.8'
-  elsif puppetversion =~ / 5\./
+  if puppetversion =~ / 5\./
     gem 'CFPropertyList',        '~> 2.3'
   end
 
