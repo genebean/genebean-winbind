@@ -7,31 +7,20 @@
   "source": "https://github.com:genebean/genebean-winbind.git",
   "project_page": "https://github.com/genebean/genebean-winbind",
   "issues_url": "https://github.com/genebean/genebean-winbind/issues",
-  "tags": [
-    "winbind",
-    "smb"
-  ],
   "dependencies": [
     {
       "name": "puppetlabs/inifile",
-      "version_requirement": ">= 1.4.2"
+      "version_requirement": ">= 1.4.2 < 5.0.0"
     },
     {
       "name": "puppetlabs/stdlib",
-      "version_requirement": ">= 4.4.0"
-    }
-  ],
-  "requirements": [
-    {
-      "name": "puppet",
-      "version_requirement": ">= 3.8.0 < 6.0.0"
+      "version_requirement": ">= 4.4.0 < 7.0.0"
     }
   ],
   "operatingsystem_support": [
     {
       "operatingsystem": "CentOS",
       "operatingsystemrelease": [
-        "5",
         "6",
         "7"
       ]
@@ -39,7 +28,6 @@
     {
       "operatingsystem": "RedHat",
       "operatingsystemrelease": [
-        "5",
         "6",
         "7"
       ]
@@ -47,11 +35,22 @@
     {
       "operatingsystem": "SLES",
       "operatingsystemrelease": [
-        "11 SP3",
-        "11 SP4",
         "12",
         "12 SP1"
       ]
     }
-  ]
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": ">= 5.0.0 < 7.0.0"
+    }
+  ],
+  "tags": [
+    "winbind",
+    "smb"
+  ],
+  "pdk-version": "1.17.0",
+  "template-url": "pdk-default#1.17.0",
+  "template-ref": "tags/1.17.0-0-gd3a4319"
 }

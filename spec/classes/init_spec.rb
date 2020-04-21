@@ -11,9 +11,9 @@ describe 'winbind' do
 
       # Check that all classes are present
       it { is_expected.to compile.with_all_deps }
-      it { is_expected.to contain_class('winbind::install')}
-      it { is_expected.to contain_class('winbind::config')}
-      it { is_expected.to contain_class('winbind::service')}
+      it { is_expected.to contain_class('winbind::install') }
+      it { is_expected.to contain_class('winbind::config') }
+      it { is_expected.to contain_class('winbind::service') }
 
       context 'with domain and login restrictions set' do
         let(:params) do
@@ -24,14 +24,13 @@ describe 'winbind' do
           }
         end
 
-        it 'should pass parameters to winbind' do
-          should contain_class('winbind').with(
+        it 'passes parameters to winbind' do
+          is_expected.to contain_class('winbind').with(
             'pam_require_membership_of' => '["sysadmins", "iso-scans"]',
             'smb_realm'                 => 'AD.EXAMPLE.COM',
             'smb_workgroup'             => 'AD',
           )
         end
-
       end
 
       context 'with package_ensure set to installed' do
@@ -41,8 +40,8 @@ describe 'winbind' do
           }
         end
 
-        it 'should pass parameters to winbind' do
-          should contain_class('winbind').with(
+        it 'passes parameters to winbind' do
+          is_expected.to contain_class('winbind').with(
             'package_ensure' => 'installed',
           )
         end
@@ -57,14 +56,13 @@ describe 'winbind' do
           }
         end
 
-        it 'should pass parameters to winbind' do
-          should contain_class('winbind').with(
+        it 'passes parameters to winbind' do
+          is_expected.to contain_class('winbind').with(
             'manage_messagebus_service' => false,
             'manage_oddjob_service'     => false,
             'manage_samba_service'      => false,
           )
         end
-
       end
 
       context 'with sharing enabled' do
@@ -74,14 +72,8 @@ describe 'winbind' do
           }
         end
 
-        it 'should pass parameters to winbind' do
-          should contain_class('winbind').with(
-            'enable_sharing' => true,
-          )
-        end
-
-        it 'should pass parameters to winbind' do
-          should contain_class('winbind').with(
+        it 'passes parameters to winbind' do
+          is_expected.to contain_class('winbind').with(
             'enable_sharing' => true,
           )
         end

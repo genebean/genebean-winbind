@@ -1,22 +1,49 @@
+---
+os: linux
+dist: xenial
 language: ruby
 cache: bundler
-
-matrix:
+before_install:
+  - bundle -v
+  - rm -f Gemfile.lock
+  - "# Update system gems if requested. This is useful to temporarily workaround troubles in the test runner"
+  - "# See https://github.com/puppetlabs/pdk-templates/commit/705154d5c437796b821691b707156e1b056d244f for an example of how this was used"
+  - "# Ignore exit code of SIGPIPE'd yes to not fail with shell's pipefail set"
+  - '[ -z "$RUBYGEMS_VERSION" ] || (yes || true) | gem update --system $RUBYGEMS_VERSION'
+  - gem --version
+  - bundle -v
+script:
+  - 'bundle exec rake $CHECK'
+bundler_args: --without system_tests
+rvm:
+  - 2.5.7
+stages:
+  - static
+  - spec
+  - acceptance
+  -
+    if: tag =~ ^v\d
+    name: deploy
+jobs:
+  fast_finish: true
   include:
-    - rvm: 2.1.6
-      env: PUPPET_VERSION="~> 4.0"
-    - rvm: 2.4.1
-      env: PUPPET_VERSION="~> 5.0"
-    - rvm: 2.4.1
-      env: PUPPET_VERSION="~> 5.0" STRICT_VARIABLES="yes"
-
-script: 'bundle exec rake tests'
-
+    -
+      env: CHECK="check:symlinks check:git_ignore check:dot_underscore check:test_file rubocop syntax lint metadata_lint"
+      stage: static
+    -
+      env: PUPPET_GEM_VERSION="~> 5.0" CHECK=parallel_spec
+      rvm: 2.4.5
+      stage: spec
+    -
+      env: PUPPET_GEM_VERSION="~> 6.0" CHECK=parallel_spec
+      rvm: 2.5.7
+      stage: spec
+    -
+      env: DEPLOY_TO_FORGE=yes
+      stage: deploy
+branches:
+  only:
+    - master
+    - /^v\d/
 notifications:
-  email:
-    on_failure: change
-    on_success: never
-  slack:
-    rooms:
-      - secure: "fQ1/7zFZ88ICDBxi0pSSauwVZJbLXLYf6FEWlEFlyQp9gCo8A1+KFIGNo0SsVzAVzNJ9Iw4u1CzjB8oIEgo5HwmNzRblAhe2P1bixHpsxj+4ppysYIs/CK25iZFIVnbezM97PpjTIMhJEcHLicwmfIH5wmV88xvCikTgweMxD8U="
-      - secure: "X8IUy6HqQfGXlPdBCQRJ0bYg1LfCBUEOoYhaB93KTK38+xkqY1P425ocgtR1ifyxJR9R6l1AWWRNEBhe0sijSwI3UCrILbAvQLAU32sGuPSDOLcqIMK+ZmHoqmvnMRtG4JNtlJOs9zD9TrAyH9lBieW9yqlz5J1htpJ6Qe0k8pA="
+  email: false
