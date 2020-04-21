@@ -9,8 +9,7 @@ case $::kernel {
   }
 
   default : {
-    fail("${::operatingsystem} is not supported.")
+    fail("${facts['os']['name']} is not supported.")
   }
 
 } # end case $::kernel
-

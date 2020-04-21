@@ -18,6 +18,5 @@ Facter.add(:test_join) do
     else
       '1'
     end
-
   end
 end
