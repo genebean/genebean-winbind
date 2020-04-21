@@ -14,20 +14,14 @@ describe 'winbind::install' do
 
         case facts[:os]['family']
         when 'RedHat'
-          case facts[:os]['release']['major']
-          when '5'
-            it { should contain_package('samba3x-winbind').with_ensure('present') }
-            it { should have_package_resource_count(1) }
-          else
-            it { should contain_package('samba-winbind-clients').with_ensure('present') }
-            it { should contain_package('oddjob-mkhomedir').with_ensure('present') }
-            it { should have_package_resource_count(2) }
-          end
+          it { is_expected.to contain_package('samba-winbind-clients').with_ensure('present') }
+          it { is_expected.to contain_package('oddjob-mkhomedir').with_ensure('present') }
+          it { is_expected.to have_package_resource_count(2) }
         when 'Suse'
-          it { should contain_package('samba-winbind').with_ensure('present') }
-          it { should have_package_resource_count(1) }
+          it { is_expected.to contain_package('samba-winbind').with_ensure('present') }
+          it { is_expected.to have_package_resource_count(1) }
         else
-          it {is_expected.to raise_error(/OS family is not supported/)}
+          it { is_expected.to raise_error(%r{OS family is not supported}) }
         end # ends case facts[:osfamily]
       end # ends context 'with defaults'
 
@@ -40,20 +34,14 @@ describe 'winbind::install' do
 
         case facts[:os]['family']
         when 'RedHat'
-          case facts[:os]['release']['major']
-          when '5'
-            it { should contain_package('samba3x-winbind').with_ensure('installed') }
-            it { should have_package_resource_count(1) }
-          else
-            it { should contain_package('samba-winbind-clients').with_ensure('installed') }
-            it { should contain_package('oddjob-mkhomedir').with_ensure('installed') }
-            it { should have_package_resource_count(2) }
-          end
+          it { is_expected.to contain_package('samba-winbind-clients').with_ensure('installed') }
+          it { is_expected.to contain_package('oddjob-mkhomedir').with_ensure('installed') }
+          it { is_expected.to have_package_resource_count(2) }
         when 'Suse'
-          it { should contain_package('samba-winbind').with_ensure('installed') }
-          it { should have_package_resource_count(1) }
+          it { is_expected.to contain_package('samba-winbind').with_ensure('installed') }
+          it { is_expected.to have_package_resource_count(1) }
         else
-          it {is_expected.to raise_error(/OS family is not supported/)}
+          it { is_expected.to raise_error(%r{OS family is not supported}) }
         end # ends case facts[:osfamily]
       end # ends context 'with package_ensure changed to installed'
 
@@ -64,26 +52,21 @@ describe 'winbind::install' do
           }"
         end
 
+        # rubocop:disable RSpec/RepeatedExample
         case facts[:os]['family']
         when 'RedHat'
-          case facts[:os]['release']['major']
-          when '5'
-            it { should contain_package('samba3x-winbind').with_ensure('present') }
-            it { should contain_package('samba3x').with_ensure('present') }
-            it { should have_package_resource_count(2) }
-          else
-            it { should contain_package('samba-winbind-clients').with_ensure('present') }
-            it { should contain_package('oddjob-mkhomedir').with_ensure('present') }
-            it { should contain_package('samba').with_ensure('present') }
-            it { should have_package_resource_count(3) }
-          end
+          it { is_expected.to contain_package('samba-winbind-clients').with_ensure('present') }
+          it { is_expected.to contain_package('oddjob-mkhomedir').with_ensure('present') }
+          it { is_expected.to contain_package('samba').with_ensure('present') }
+          it { is_expected.to have_package_resource_count(3) }
         when 'Suse'
-          it { should contain_package('samba-winbind').with_ensure('present') }
-          it { should contain_package('samba').with_ensure('present') }
-          it { should have_package_resource_count(2) }
+          it { is_expected.to contain_package('samba-winbind').with_ensure('present') }
+          it { is_expected.to contain_package('samba').with_ensure('present') }
+          it { is_expected.to have_package_resource_count(2) }
         else
-          it {is_expected.to raise_error(/OS family is not supported/)}
+          it { is_expected.to raise_error(%r{OS family is not supported}) }
         end # ends case facts[:osfamily]
+        # rubocop:ensable RSpec/RepeatedExample
       end # ends context 'with sharing enabled'
     end
   end
