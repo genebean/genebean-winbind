@@ -1,6 +1,12 @@
 ---
 .gitlab-ci.yml:
   delete: true
+.travis.yml:
+  branches:
+    - master
+    - /^\d+\.\d+.\d+/
+  deploy_to_forge:
+    tag_regex: "^\\d+\\.\\d+.\\d+"
 appveyor.yml:
   delete: true
 Gemfile:
