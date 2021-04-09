@@ -27,6 +27,18 @@ class winbind::install inherits winbind {
       }
     } # end Suse
 
+    'Debian' : {
+      package { 'winbind':
+        ensure => $winbind::package_ensure,
+      }
+
+      if ($winbind::enable_sharing) {
+        package { 'samba':
+          ensure => $winbind::package_ensure,
+        }
+      }
+    } # end Debian
+
     default : {
       fail("The ${facts['os']['family']} OS family is not supported by this module yet.")
     }

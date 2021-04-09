@@ -20,6 +20,7 @@ class winbind::config inherits winbind {
     $joindomain = $facts['os']['family'] ? {
       'RedHat' => 'joinDomainForRedHat.sh',
       'Suse'   => 'joinDomainForSUSE.sh',
+      'Debian' => 'joinDomainForDebian.sh',
       default  => 'joindomainForRedHat.sh',
     }
 

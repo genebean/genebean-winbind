@@ -160,7 +160,7 @@ Defines the ensure setting passed to all managed packages. Defaults to `present`
 
 ## Limitations
 
-This module has only been tested on Red Hat 5, CentOS 6 & 7, and SLES 11 & 12.
+This module has only been tested on Red Hat 5, CentOS 6 & 7, SLES 11 & 12, and Debian 9 & 10.
 
 
 ## Troubleshooting
@@ -195,6 +195,7 @@ Pull requests are welcome!
 * Adam Stephens (@adamcstephens) - Added support for toggling service management
   and overriding the package ensure setting
 * Jake Spain (@thespain) - Added support for SLES 11 & 12
+* Jason Lavoie (@oasys) - Added Debian support
 
 
 [bolt]: https://github.com/puppetlabs/bolt

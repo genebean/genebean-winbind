@@ -80,6 +80,21 @@ class winbind::service inherits winbind {
       }
     } # end Suse
 
+    'Debian' : {
+      if ($winbind::enable_sharing == true and
+          $winbind::manage_samba_service == true) {
+        service { 'smbd':
+          ensure => 'running',
+          enable => true,
+        }
+      }
+
+      service { 'winbind':
+        ensure => 'running',
+        enable => true,
+      }
+    } # end Debian
+
     default : {
       fail("The ${facts['os']['family']} OS family is not supported by this module yet.")
     }

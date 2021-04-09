@@ -29,6 +29,9 @@ describe 'winbind::service' do
         when 'Suse'
           it { is_expected.to contain_service('winbind').with_ensure('running') }
           it { is_expected.to have_service_resource_count(1) }
+        when 'Debian'
+          it { is_expected.to contain_service('winbind').with_ensure('running') }
+          it { is_expected.to have_service_resource_count(1) }
         else
           it { is_expected.to raise_error(%r{OS family is not supported}) }
         end # ends case facts[:osfamily]
@@ -84,6 +87,10 @@ describe 'winbind::service' do
         when 'Suse'
           it { is_expected.to contain_service('winbind').with_ensure('running') }
           it { is_expected.to contain_service('smb').with_ensure('running') }
+          it { is_expected.to have_service_resource_count(2) }
+        when 'Debian'
+          it { is_expected.to contain_service('winbind').with_ensure('running') }
+          it { is_expected.to contain_service('smbd').with_ensure('running') }
           it { is_expected.to have_service_resource_count(2) }
         else
           it { is_expected.to raise_error(%r{OS family is not supported}) }

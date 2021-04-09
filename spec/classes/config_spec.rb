@@ -31,6 +31,10 @@ describe 'winbind::config' do
           it 'uses joinDomainForSUSE.sh as source for /root/joinDomain.sh' do
             is_expected.to contain_file('/root/joinDomain.sh').with_source('puppet:///modules/winbind/joinDomainForSUSE.sh')
           end
+        when 'Debian'
+          it 'uses joinDomainForDebian.sh as source for /root/joinDomain.sh' do
+            is_expected.to contain_file('/root/joinDomain.sh').with_source('puppet:///modules/winbind/joinDomainForDebian.sh')
+          end
         end # ends case facts[:osfamily]
       end # ends context 'with defaults'
 
