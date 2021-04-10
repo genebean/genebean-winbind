@@ -38,6 +38,13 @@
         "12",
         "12 SP1"
       ]
+    },
+    {
+      "operatingsystem": "Debian",
+      "operatingsystemrelease": [
+        "9",
+        "10"
+      ]
     }
   ],
   "requirements": [
